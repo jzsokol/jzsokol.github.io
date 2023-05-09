@@ -10,7 +10,7 @@ image:
   alt: Jorge Wagensberg, the "Einstein of Spain".
 ---
 
-On January 30, 2017, Jorge Wagnesberg published his article "La Muerte en Aforismos"[^footnote]--"Death in Aphorisms"--in El Pais, the same newspaper that, just one year later, called Jorge the "Einstein of Spain" in an obituary celebrating his life[^fn-nth-2]. Jorge was my cousin and part of the generation of our family that survived the holocaust through the foresight of his father's brother who moved to Barcelona shortly prior Jorge's birth in 1948. Jorge was always the talk of the family, and I had the opportunity to meet Jorge and sit with him for dinner just once in my life when I was living in Spain. As a tribute, I translated this article in his memory.
+On January 30, 2017, Jorge Wagnesberg published his article "La Muerte en Aforismos"[^footnote]--"Death in Aphorisms"--in El Pais, the same newspaper that, just one year later, called Jorge the "Einstein of Spain" in an obituary celebrating his life[^fn-nth-2]. Jorge was my cousin and part of the generation of our family that survived the holocaust through the foresight of his father's brother who moved to Barcelona shortly prior to Jorge's birth in 1948. Jorge was always the talk of the family, and I had the opportunity to meet Jorge and sit with him for dinner just once in my life when I was living in Spain. As a tribute, I translated this article in his memory.
 
 ## Death in Aphorisms
 
