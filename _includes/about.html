@@ -1,0 +1,24 @@
+<!-- Get default posts -->
+
+  {% for post in posts %}
+    {% if post.title == 'About Joseph Z. Sokol' %}
+      {% assign title = post.title %}
+      <h1 class="card-title" id="title">
+        {{ post.title }}
+      </h1>
+      {% include no-linenos.html content=post.content %}
+      <div id="summary"></div>
+      <script>
+          function about() {
+          var content = `{{ content }}`;
+          // var xmlString = content;
+          // var doc = new DOMParser().parseFromString(xmlString, "text/xml");
+          document.getElementById("summary").innerHTML = content;
+          document.getElementById("summary").style = "font-size:1.04rem"
+          }
+          about();
+      </script>
+
+      <!-- {{ content | markdownify | escape }} -->
+    {% endif %}
+  {% endfor %}

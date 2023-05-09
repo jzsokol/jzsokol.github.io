@@ -1,0 +1,142 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Joseph Z. Sokol</title>
+  <subtitle>Explore works by Joseph Z. Sokol</subtitle>
+  <updated>2023-05-08T23:58:14-07:00</updated>
+  <author>
+    <name>Joseph Z. Sokol</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
+  <rights> © 2023 Joseph Z. Sokol </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>About Joseph Z. Sokol</title>
+    <link href="http://localhost:4000/posts/about-me/" rel="alternate" type="text/html" title="About Joseph Z. Sokol" />
+    <published>2023-04-16T09:27:00-07:00</published>
+  
+    <updated>2023-04-16T09:27:00-07:00</updated>
+  
+    <id>http://localhost:4000/posts/about-me/</id>
+    <content src="http://localhost:4000/posts/about-me/" />
+    <author>
+      <name>Joseph Z. Sokol</name>
+    </author>
+
+  
+    
+    <category term="About" />
+    
+    <category term="Author" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Who I Am
+
+
+Hi! I am Joseph Sokol. I’m a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer. I am the founder of iCardio.ai and OlehPay.
+
+I have taken an atypical path in life having dropped out of University to pursue entrepreneurship. I’ve lived in Spain and Israel, there I taught myself two languages (Spanish, Hebrew). Since ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Neural Networks and the Future of AI</title>
+    <link href="http://localhost:4000/posts/neural-networks-and-the-future-of-ai/" rel="alternate" type="text/html" title="Neural Networks and the Future of AI" />
+    <published>2022-08-22T00:00:00-07:00</published>
+  
+    <updated>2022-08-22T00:00:00-07:00</updated>
+  
+    <id>http://localhost:4000/posts/neural-networks-and-the-future-of-ai/</id>
+    <content src="http://localhost:4000/posts/neural-networks-and-the-future-of-ai/" />
+    <author>
+      <name>Joseph Z. Sokol</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="iCardio.ai" />
+    
+    <category term="Cardiology" />
+    
+    <category term="Artificial intelligences" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Neural networks are becoming the 0,1 operators of programs.
+With exponential growth in computational capability, entire neural networks will eventually become the basic, though incredibly elastic, 0,1 operators of programs.
+Many may be aware that the basics of computing rely on the logical operator of true or false, classically represented as 0 and 1. Fewer may be aware, however, that a neuron,...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Death in Aphorisms by the "Einstein of Spain"</title>
+    <link href="http://localhost:4000/posts/death-in-aphorisms-from-the-einstein-of-spain/" rel="alternate" type="text/html" title="Death in Aphorisms by the "Einstein of Spain"" />
+    <published>2019-01-19T00:00:00-08:00</published>
+  
+    <updated>2019-01-19T00:00:00-08:00</updated>
+  
+    <id>http://localhost:4000/posts/death-in-aphorisms-from-the-einstein-of-spain/</id>
+    <content src="http://localhost:4000/posts/death-in-aphorisms-from-the-einstein-of-spain/" />
+    <author>
+      <name>Joseph Z. Sokol</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Jorge Wagensberg" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      On January 30, 2017, Jorge Wagnesberg published his article “La Muerte en Aforismos”1–“Death in Aphorisms”–in El Pais, the same newspaper that, just one year later, called Jorge the “Einstein of Spain” in an obituary celebrating his life2. Jorge was my cousin and part of the generation of our family that survived the holocaust through the foresight of his father’s brother who moved to Barcelona...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
