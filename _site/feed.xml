@@ -3,8 +3,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://localhost:4000/</id>
   <title>Joseph Z. Sokol</title>
-  <subtitle>Explore works by Joseph Z. Sokol</subtitle>
-  <updated>2023-05-08T23:58:14-07:00</updated>
+  <subtitle>An internet capsule for all things Joseph Z. Sokol</subtitle>
+  <updated>2023-05-09T10:18:38-07:00</updated>
   <author>
     <name>Joseph Z. Sokol</name>
     <uri>http://localhost:4000/</uri>
