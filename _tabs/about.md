@@ -9,7 +9,7 @@ permalink: /about
 ### About Joseph Z. Sokol
 
 ![Desktop View](/assets/wiki_profile.png){: width="640" height="480" .w-50 .left}
-Hi! I am Joseph Sokol. I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer. I am the founder of [iCardio.ai](https://iCardio.ai) and [OlehPay](https://olehpay.co.il).
+Hi! I am Joseph Sokol. I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer. My work expertise is focused on the application of artificial intelligence in cardiology. I am the founder of [iCardio.ai](https://iCardio.ai) and [OlehPay](https://olehpay.co.il).
 
 I have taken an atypical path in life having dropped out of University to pursue entrepreneurship. I've lived in Spain and Israel, there I taught myself two languages (Spanish, Hebrew). Since my teens, I've passionately pursued classical piano, delving into Chopin, Debussy and other Romantics, and, I competed in category 1/2 pro cycling races in California, despite being a Type 1 diabetic. I hold a unique and optimistic perspective on life. <br><br>
 
@@ -17,7 +17,7 @@ I have taken an atypical path in life having dropped out of University to pursue
 
 ### [iCardio.ai](https://icardio.ai), Los Angeles, California
 
-In October of 2019, I founded iCardio.ai, along with Dr. Joshua Penn and Dr. Roman Sandler. iCardio.ai is a Los Angeles-based deep learning startup for heart ultrasound analysis. iCardio.ai’s core AI product, the iCardio.ai Brain v1, was trained on its internal dataset of over +200 million images, making it one of the largest-scale radiological AI products in the world. iCardio.ai has worked with some of the largest Ultrasound vendors including GE Healthcare and Clarius, to deliver its technology to clinicians around the globe.
+In October of 2019, I founded iCardio.ai, along with Dr. Joshua Penn and Dr. Roman Sandler. iCardio.ai is a Los Angeles-based deep learning startup for heart ultrasound analysis. iCardio.ai’s core AI product, the iCardio.ai Brain v1, was trained on its internal dataset of over +200 million images, making it one of the largest-scale radiological AI products in the world. iCardio.ai has worked with some of the largest Ultrasound vendors including GE Healthcare, Butterfly Network, UltraLinQ, and Viz.ai, to deliver its technology to clinicians around the globe. In February of 2024, iCardio.ai's Aortic Stenosis detection tool was awarded Breakthrough Device Designation by the FDA.
 
 ### [OlehPay](https://olehpay.co.il), Jerusalem, Israel
 

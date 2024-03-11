@@ -29,7 +29,7 @@ description: >- # used by seo meta and the atom feed
 url: ""
 
 linkedin:
-  username: joseph-sokol-ab5515126
+  username: joseph-sokol
 
 github:
   username: jzsokol # change to your github username
@@ -44,7 +44,7 @@ social:
   email: josephzsokol+home@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://www.linkedin.com/in/joseph-sokol-ab5515126/
+    - https://www.linkedin.com/in/joseph-sokol/
     # - https://twitter.com/username # change to your twitter homepage
     - https://github.com/jzsokol # change to your github homepage
     # Uncomment below to add more social links

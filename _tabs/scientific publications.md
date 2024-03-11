@@ -1,6 +1,6 @@
 ---
 layout: publications
-icon: fas fa-archive
+icon: fas fa-flask
 order: 3
 permalink: /publications
 ---

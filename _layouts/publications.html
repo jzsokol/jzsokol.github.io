@@ -2,10 +2,84 @@
 layout: page
 # The Home page layout
 ---
+<!--
+<div id="pig"></div>
+<script src="/assets/js/pig.min.js"></script>
+<script>
+var imageData = [
+  {filename: 'd8970008-d003-4d8b-ab56-e1646fe2d289.jpeg', aspectRatio: 1.777},
+  {filename: 'ted.png', aspectRatio: 1.777},
+  {filename: 'green.jpg', aspectRatio: 1.777},
+  {filename: 'orange.jpg', aspectRatio: 1.777},
+  {filename: 'yellow.jpg', aspectRatio: 1},
+  {filename: 'purple.jpg', aspectRatio: 2.4},
+];
+
+var options = {
+  urlForSize: function(filename, size) {
+    return '/assets/img/' + size + '/' + filename;
+  },
+  // ...
+};
+
+var pig = new Pig(imageData, options).enable();
+</script> -->
 
 <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4 mt-5">
   <div id="related-posts" class="mb-2 mb-sm-4">
     <h3 class="pt-2 mb-4 ml-1" data-toc-skip="">Find Publications</h3>
+    <div class="card-deck mb-4">
+      <div class="card">
+        <a target="_blank" href="https://scholar.google.com/citations?user=LbQ36BsAAAAJ&hl=en" style="border-bottom: 0px;">
+          <div class="card-body">
+            <em class="small">May, 2023</em>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip="">EchoGPT, A Multimodal Language Model for Qualitative Reporting of Echocardiography</h3>
+            <div class="text-muted small">
+              <p>
+                Conference: American Society of Echocardiography 35th Annual Scientific Sessions
+              </p>
+              <p>Qualitative interpretation of echocardiography remains a nuanced and sophisticated discipline owing to the variety of cardiac pathophysiologies. Capturing and reproducing a full echocardiographic report with artificial intelligence (AI) in a manner that mimics a human echocardiographer remains the objective of AI researchers.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="card-deck mb-4">
+      <div class="card">
+        <a target="_blank" href="https://scholar.google.com/citations?user=LbQ36BsAAAAJ&hl=en" style="border-bottom: 0px;">
+          <div class="card-body">
+            <em class="small">May, 2023</em>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip="">AI-Based Diagnosis of Aortic Stenosis in B-Mode Imagery</h3>
+            <div class="text-muted small">
+              <p>
+                Conference: American Society of Echocardiography 35th Annual Scientific Sessions
+              </p>
+              <p>
+                Aortic Stenosis (AS) is a critical cardiac condition often diagnosed through echocardiography. However, the interpretation of echocardiographic data can be challenging due to variability in image quality and reader expertise.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="card-deck mb-4">
+      <div class="card">
+        <a target="_blank" href="https://scholar.google.com/citations?user=LbQ36BsAAAAJ&hl=en" style="border-bottom: 0px;">
+          <div class="card-body">
+            <em class="small">May, 2023</em>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip="">Reproduction of Full Echocardiographic Report using Machine Learning from Large-scale Echocardiogram Database</h3>
+            <div class="text-muted small">
+              <p>
+                Conference: American Society of Echocardiography 34th Annual Scientific Sessions
+              </p>
+              <p>
+                Multiple previous studies have used machine learning tools to estimate individual measurements (e.g. ejection fraction) and pathologies (e.g. aortic sclerosis) from echocardiographic images. However, to our knowledge no study has attempted to use machine learning to recreate the full echocardiographic report.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
     <div class="card-deck mb-4">
       <div class="card">
         <a target="_blank" href="https://www.sciencedirect.com/science/article/abs/pii/S0894731723000147?dgcid=coauthor" style="border-bottom: 0px;">
@@ -14,12 +88,17 @@ layout: page
             <h3 class="pt-0 mt-1 mb-3" data-toc-skip="">Automated Detection of Aortic Stenosis Using Machine Learning</h3>
             <div class="text-muted small">
               <p>
+                Journal: Journal of American Society of Echocardiography
+              </p>
+              <p>
                 Aortic stenosis (AS) is a degenerative valve condition that is underdiagnosed and undertreated. Detection of AS using limited two-dimensional echocardiography could enable screening and improve appropriate referral and treatment of this condition. The aim of this study was to develop methods for automated detection of AS from limited imaging data sets. Read more ...
               </p>
             </div>
           </div>
         </a>
       </div>
+    </div>
+
       <!-- <div class="card">
         <a href="/posts/about-me/">
           <div class="card-body">

@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Joseph Z. Sokol</title>
   <subtitle>An internet capsule for all things Joseph Z. Sokol</subtitle>
-  <updated>2023-05-09T10:18:38-07:00</updated>
+  <updated>2024-03-10T21:32:13-04:00</updated>
   <author>
     <name>Joseph Z. Sokol</name>
     <uri>http://localhost:4000/</uri>
@@ -13,7 +13,7 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
-  <rights> © 2023 Joseph Z. Sokol </rights>
+  <rights> © 2024 Joseph Z. Sokol </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
@@ -22,9 +22,9 @@
   <entry>
     <title>About Joseph Z. Sokol</title>
     <link href="http://localhost:4000/posts/about-me/" rel="alternate" type="text/html" title="About Joseph Z. Sokol" />
-    <published>2023-04-16T09:27:00-07:00</published>
+    <published>2023-04-16T12:27:00-04:00</published>
   
-    <updated>2023-04-16T09:27:00-07:00</updated>
+    <updated>2023-05-09T14:59:17-04:00</updated>
   
     <id>http://localhost:4000/posts/about-me/</id>
     <content src="http://localhost:4000/posts/about-me/" />
@@ -51,9 +51,9 @@
       Who I Am
 
 
-Hi! I am Joseph Sokol. I’m a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer. I am the founder of iCardio.ai and OlehPay.
+Hi! I am Joseph Sokol. I’m a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer. My work expertise is focused on the application of artificial intelligence in cardiology. I am the founder of iCardio.ai and OlehPay.
 
-I have taken an atypical path in life having dropped out of University to pursue entrepreneurship. I’ve lived in Spain and Israel, there I taught myself two languages (Spanish, Hebrew). Since ...
+I have taken an atypical path, having dropped out of University to pursue entrepreneurship. I’ve lived...
     </summary>
   
 
@@ -63,9 +63,9 @@ I have taken an atypical path in life having dropped out of University to pursue
   <entry>
     <title>Neural Networks and the Future of AI</title>
     <link href="http://localhost:4000/posts/neural-networks-and-the-future-of-ai/" rel="alternate" type="text/html" title="Neural Networks and the Future of AI" />
-    <published>2022-08-22T00:00:00-07:00</published>
+    <published>2022-08-22T00:00:00-04:00</published>
   
-    <updated>2022-08-22T00:00:00-07:00</updated>
+    <updated>2022-08-22T00:00:00-04:00</updated>
   
     <id>http://localhost:4000/posts/neural-networks-and-the-future-of-ai/</id>
     <content src="http://localhost:4000/posts/neural-networks-and-the-future-of-ai/" />
@@ -105,9 +105,9 @@ Many may be aware that the basics of computing rely on the logical operator of t
   <entry>
     <title>Death in Aphorisms by the "Einstein of Spain"</title>
     <link href="http://localhost:4000/posts/death-in-aphorisms-from-the-einstein-of-spain/" rel="alternate" type="text/html" title="Death in Aphorisms by the "Einstein of Spain"" />
-    <published>2019-01-19T00:00:00-08:00</published>
+    <published>2019-01-19T00:00:00-05:00</published>
   
-    <updated>2019-01-19T00:00:00-08:00</updated>
+    <updated>2023-05-09T14:59:17-04:00</updated>
   
     <id>http://localhost:4000/posts/death-in-aphorisms-from-the-einstein-of-spain/</id>
     <content src="http://localhost:4000/posts/death-in-aphorisms-from-the-einstein-of-spain/" />
