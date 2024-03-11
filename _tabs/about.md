@@ -9,7 +9,7 @@ permalink: /about
 ### About Joseph Z. Sokol
 
 ![Desktop View](/assets/wiki_profile.png){: width="640" height="480" .w-50 .left}
-Hi! I am Joseph Sokol. I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer. My work expertise is focused on the application of artificial intelligence in cardiology. I am the founder of [iCardio.ai](https://iCardio.ai) and [OlehPay](https://olehpay.co.il).
+Hi! I am Joseph Sokol. My work expertise is focused on the application of artificial intelligence in cardiology, scientific, technical and commercial. But, more than that, I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-professional bike racer.  I am the founder of [iCardio.ai](https://iCardio.ai) and [OlehPay](https://olehpay.co.il).
 
 I have taken an atypical path in life having dropped out of University to pursue entrepreneurship. I've lived in Spain and Israel, there I taught myself two languages (Spanish, Hebrew). Since my teens, I've passionately pursued classical piano, delving into Chopin, Debussy and other Romantics, and, I competed in category 1/2 pro cycling races in California, despite being a Type 1 diabetic. I hold a unique and optimistic perspective on life. <br><br>
 
