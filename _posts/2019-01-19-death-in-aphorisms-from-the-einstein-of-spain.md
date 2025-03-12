@@ -35,4 +35,4 @@ Humans are the first organisms to interrogate themselves. We become based on thi
 ## Sources
 
 [^footnote]: https://elpais.com/cultura/2017/01/31/babelia/1485875547_972421.html
-[^fn-nth-2]: https://elpais.com/cultura/2017/01/31/babelia/1485875547_972421.html
+[^fn-nth-2]: https://elpais.com/cultura/2018/03/03/actualidad/1520098151_305075.html
