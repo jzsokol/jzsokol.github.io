@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Towards the Automated Echocardiographic Report — Joseph Z. Sokol</title>
+<meta name="description" content="A review of eight years of deep learning applied to cardiac ultrasound — and a thesis on the field's clear trajectory toward a fully automated echocardiographic report." />
+<meta name="theme-color" content="#FAFAF5" />
+<link rel="icon" type="image/png" href="assets/256-favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --ink:#0F172A;
+    --ink-soft:rgba(15,23,42,.72);
+    --ink-mute:rgba(15,23,42,.55);
+    --rule:rgba(15,23,42,.10);
+    --paper:#FAFAF5;
+    --card:#FFFFFF;
+    --accent:#1E3A8A;
+    --accent-hover:#1E40AF;
+    --accent-bg:#EEF2FF;
+    --cardio:#DC2626;
+    --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:rgba(30,58,138,.18);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{color:var(--accent-hover)}
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;letter-spacing:-0.012em;margin:0}
+  p{margin:0 0 1em}
+
+  /* TOPBAR (identical to landing) */
+  .topbar{border-bottom:1px solid var(--rule);background:rgba(250,250,250,.85);backdrop-filter:saturate(160%) blur(10px);position:sticky;top:0;z-index:10}
+  .topbar__inner{max-width:780px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .topbar__brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-0.01em;color:var(--ink)}
+  .topbar__brand img{width:32px;height:32px;border-radius:999px;object-fit:cover;object-position:center 18%;background:#EEF2FF;border:1px solid var(--rule)}
+  .topbar__nav{display:flex;gap:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+  .topbar__nav a{color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:1px}
+  .topbar__nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  @media(max-width:560px){.topbar__nav a:not(:first-child){display:none}}
+
+  /* ARTICLE LAYOUT — single readable column */
+  .article{max-width:780px;margin:0 auto;padding:48px 24px 64px}
+  .article__body figure,
+  .article__body .table-wrap{margin-top:2.2em;margin-bottom:2.2em}
+
+  .article__eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:16px;display:block;font-weight:500;
+  }
+  .article__title{
+    font-family:var(--sans);font-weight:700;
+    font-size:clamp(34px,5vw,52px);
+    line-height:1.02;letter-spacing:-0.028em;color:var(--ink);margin:0 0 18px;
+  }
+  .article__deck{
+    font-family:var(--sans);font-weight:400;font-style:normal;
+    font-size:1.12rem;line-height:1.55;color:var(--ink-soft);
+    max-width:64ch;margin:0 0 24px;
+  }
+  .article__deck strong{color:var(--ink);font-weight:600}
+  .article__byline{
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);margin:0 0 4px;
+  }
+  .article__byline strong{color:var(--ink);font-weight:600}
+  .article__meta{
+    display:flex;flex-wrap:wrap;gap:24px;align-items:baseline;justify-content:space-between;
+    padding:14px 0 18px;margin:24px 0 36px;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+  .article__meta strong{color:var(--ink);font-weight:600}
+  .article__meta a{color:var(--accent);font-weight:600}
+
+  /* FOREWORD — matches feature-card vibe */
+  .article__foreword{
+    background:var(--accent-bg);
+    border:1px solid rgba(30,58,138,.18);
+    border-left:3px solid var(--accent);
+    padding:22px 26px;border-radius:0 8px 8px 0;
+    margin:0 0 36px;
+  }
+  .article__foreword .lab{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 10px;display:block;font-weight:500;
+  }
+  .article__foreword p{
+    font-family:var(--sans);font-style:normal;
+    font-size:1rem;line-height:1.6;color:var(--ink);margin:0 0 .8em;
+  }
+  .article__foreword p:last-of-type{margin-bottom:14px}
+  .article__foreword .signoff{
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+
+  /* TOC */
+  .article__toc{
+    background:var(--card);border:1px solid var(--rule);border-radius:8px;
+    padding:20px 24px;margin:0 0 40px;
+  }
+  .article__toc-title{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-mute);margin:0 0 14px;display:block;font-weight:500;
+  }
+  .article__toc ol{margin:0;padding:0 0 0 1.2em;font-size:.92rem;line-height:1.7;color:var(--ink-soft);columns:2;column-gap:32px}
+  .article__toc li{padding:0;margin:0;break-inside:avoid}
+  .article__toc a{color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:1px}
+  .article__toc a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  @media(max-width:560px){.article__toc ol{columns:1}}
+
+  /* BODY — uses Inter throughout, matches main page */
+  .article h2{
+    font-family:var(--sans);font-weight:600;letter-spacing:-0.014em;
+    font-size:1.45rem;line-height:1.2;color:var(--ink);
+    margin:2.4em 0 .7em;padding-bottom:8px;border-bottom:1px solid var(--rule);
+  }
+  .article h3{
+    font-family:var(--sans);font-weight:600;letter-spacing:-0.008em;
+    font-size:1.05rem;line-height:1.3;color:var(--accent);margin:2em 0 .5em;
+  }
+  .article p{
+    font-family:var(--sans);
+    font-size:1.02rem;line-height:1.7;color:var(--ink);margin:0 0 1.1em;
+    text-align:justify;
+    hyphens:auto;-webkit-hyphens:auto;
+  }
+  .article p strong{font-weight:600}
+  .article a{color:var(--accent);border-bottom:1px solid rgba(30,58,138,.35)}
+  .article a:hover{border-bottom-color:var(--accent)}
+  .article sup{font-family:var(--mono);font-size:.7em;font-weight:500;vertical-align:super;line-height:0}
+  .article sup a{color:var(--accent);border:0}
+
+  .article blockquote{
+    font-family:var(--sans);font-weight:500;font-style:normal;
+    font-size:1.18rem;line-height:1.45;color:var(--ink);
+    border-left:3px solid var(--cardio);
+    padding:6px 0 6px 18px;margin:1.8em 0;
+  }
+
+  /* FIGURES */
+  .article figure{margin:2em 0;text-align:center}
+  .article figure img{max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .article figcaption{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;
+    color:var(--ink-mute);margin-top:14px;line-height:1.6;text-align:left;
+    border-left:2px solid var(--accent);padding:4px 0 4px 12px;
+  }
+  .article figcaption strong{color:var(--ink);font-weight:600;letter-spacing:0;font-family:var(--sans)}
+
+  /* TABLES */
+  .article .table-wrap{overflow-x:auto;margin:1.6em 0;-webkit-overflow-scrolling:touch}
+  .article .table-publications{font-size:11.5px;line-height:1.45}
+  .article .table-publications th,
+  .article .table-publications td{padding:8px 10px;font-size:11.5px;vertical-align:top}
+  .article .table-publications td:nth-child(1){white-space:nowrap;font-weight:500;color:var(--ink)}
+  .article .table-publications td:nth-child(2){white-space:nowrap;text-align:center}
+  .article .table-publications td:nth-child(7),
+  .article .table-publications td:nth-child(8),
+  .article .table-publications td:nth-child(9),
+  .article .table-publications td:nth-child(10){white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+  .article .table-caption{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;
+    color:var(--ink-mute);margin-top:14px;line-height:1.6;text-align:left;
+    border-left:2px solid var(--accent);padding:4px 0 4px 12px;display:block;
+  }
+  .article table{
+    width:100%;font-family:var(--sans);font-size:13.5px;
+    border-collapse:separate;border-spacing:0;
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;
+    background:var(--card);
+  }
+  .article table th{
+    background:var(--accent-bg);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    padding:11px 13px;text-align:left;font-weight:600;color:var(--ink);
+    border-bottom:1px solid var(--rule);white-space:nowrap;
+  }
+  .article table td{padding:10px 13px;border-top:1px solid var(--rule);vertical-align:top;color:var(--ink);line-height:1.5}
+  .article table tr:first-child td{border-top:0}
+  .article table tr.sub td{
+    background:#fafafa;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;font-weight:600;color:var(--ink-mute);
+  }
+  .article table tr.highlight td{background:rgba(30,58,138,.05)}
+  .article table tr.highlight td strong{color:var(--ink)}
+
+  /* DISCLOSURE */
+  .article .disclosure{
+    margin:48px 0 0;padding:18px 22px;
+    border:1px dashed var(--rule);border-radius:6px;background:#fafafa;
+    font-family:var(--sans);font-size:.92rem;line-height:1.6;color:var(--ink-soft);
+  }
+  .article .disclosure strong{color:var(--ink);font-weight:600}
+
+  /* FOOTNOTES */
+  .article .footnotes{margin-top:48px;padding-top:24px;border-top:1px solid var(--rule)}
+  .article .footnotes h2{font-family:var(--sans);font-size:1.05rem;color:var(--ink);margin-top:0;border:0;padding:0}
+  .article .footnotes ol{margin:0;padding-left:1.4em;font-family:var(--sans);font-size:.86rem;line-height:1.55;color:var(--ink-soft)}
+  .article .footnotes li{margin-bottom:.45em}
+  .article .footnotes li[id^="fn"]:target{background:rgba(30,58,138,.08);border-radius:3px;padding:2px 4px;margin-left:-4px}
+
+  /* FOOTER (same as landing) */
+  footer{border-top:1px solid var(--rule);margin-top:0;padding:32px 0 48px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  footer .container{max-width:780px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--ink-mute)}
+  footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__brand" href="index.html">
+      <img src="assets/wiki_profile.png" alt="">
+      <span>Joseph&nbsp;Z.&nbsp;Sokol</span>
+    </a>
+    <a class="topbar__nav" href="index.html"><a style="color:var(--ink-soft)" href="index.html">← Home</a></a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <div class="article__head">
+  <span class="article__eyebrow">Research review · September 2025</span>
+  <h1 class="article__title">Towards the automated echocardiographic report</h1>
+  <p class="article__deck">
+    How far is the science from the automated echocardiographic report? In this review, we discuss the arc of how we eventually get there — from early applications of computer vision to multimodal foundation models.
+  </p>
+  <div class="article__meta">
+    <span><strong>Joseph&nbsp;Z.&nbsp;Sokol</strong> &amp; <strong>Roman&nbsp;A.&nbsp;Sandler, PhD</strong> — iCardio.ai, Los Angeles, CA</span>
+    <a href="Towards the Automated Echocardiographic Report_ A Review.pdf" target="_blank" rel="noopener">Download PDF ↗</a>
+  </div>
+
+  <aside class="article__foreword" aria-label="Author's note">
+    <span class="lab" id="intro" >Introduction</span>
+    <p>Accurate interpretation of echocardiography is critical for detection and management of cardiovascular diseases. Over the past decade, studies have explored machine-learning models applied to echocardiographic images to estimate individual measurements, interpret echocardiographic views, and predict disease. This review synthesizes the field's arc from speckle tracking to modern foundation models, mapping the literature from 2018–2025 across view classification and guidance, quantitative measurement, disease detection, and report generation. We situate academic progress alongside emerging clinical trials, regulatory milestones for radiological interpretive software, and commercial offerings, and we postulate on the field's clear trajectory: <em>the automated echocardiographic report.</em></p>
+    <span class="signoff">Towards the automated echocardiographic report - by Joseph Z. Sokol</span>
+  </aside>
+
+  <div class="article__toc">
+    <span class="article__toc-title">Contents</span>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#background">Background</a></li>
+      <li><a href="#search">Search strategy</a></li>
+      <li><a href="#history">History of computer interpretation</a></li>
+      <li><a href="#challenges">Challenges</a></li>
+      <li><a href="#regulatory">Regulatory &amp; reimbursement</a></li>
+      <li><a href="#trends">Trends across modalities</a></li>
+      <li><a href="#steps">Steps to automate the report</a></li>
+      <li><a href="#views">View classification &amp; guidance</a></li>
+      <li><a href="#measurements">Measurements</a></li>
+      <li><a href="#disease">Disease detection</a></li>
+      <li><a href="#foundation">Foundation models</a></li>
+      <li><a href="#language">Language of the report</a></li>
+      <li><a href="#major-windows">Major windows &amp; POCUS</a></li>
+      <li><a href="#trials">Clinical trials</a></li>
+      <li><a href="#commercial">Commercial offerings</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+  </div><!-- /.article__head -->
+
+  <div class="article__body">
+  <h2 id="background">Background</h2>
+  <p>Echocardiography is fundamental in the assessment of cardiovascular disorders and represents one of the most ubiquitous imaging modalities in medicine.<sup><a href="#fn1" id="ref1">1</a></sup> Nearly every person in the Western world will undergo an echocardiographic examination at least once in their lifetime, and elderly persons may receive an echocardiogram one or more times per year.<sup><a href="#fn2" id="ref2">2</a></sup> More than 30 million echocardiograms are performed each year in the United States.<sup><a href="#fn3" id="ref3">3</a>,<a href="#fn4" id="ref4">4</a></sup> Since its assimilation into clinical medicine, the search term "echocardiography" yields over 200,000 articles on PubMed. Dr. Inge Edler performed the first cardiac ultrasound in Lund, Sweden in 1953, but the first formal systemization of the echocardiogram is credited to Dr. Harvey Feigenbaum, who founded the American Society of Echocardiography (ASE) in 1975. At the time of writing, we celebrate its semicentennial — ushering echocardiography's next era: artificial intelligence.</p>
+
+  <p>Over the past half-century, echocardiography has been in a continual state of maturation and evolution. Integrating 2D imaging, Doppler signaling, and 3D and 4D capabilities, these modalities allow the echocardiogram to encompass visualization of tissue morphology, muscle motion, and blood flow. The report includes descriptors that focus foremostly on four chambers, four valves, and four other structures: the pericardium, aortic root, aortic arch, and pulmonary artery. Given this standardization — both in terms of imaging formats and reporting expectations — interpretation of echocardiography is a contained problem, making it particularly well-suited to automation with artificial intelligence.<sup><a href="#fn5" id="ref5">5</a>,<a href="#fn6" id="ref6">6</a>,<a href="#fn7" id="ref7">7</a></sup></p>
+
+  <p>Yet, for all the expectation around AI in echocardiography, the topic receives only a brief acknowledgement, as an excerpt before the conclusion, in the latest ASE guidelines.<sup><a href="#fn6">6</a></sup> Outpacing guidelines, however, the challenge of automating echocardiographic interpretation has gained popularity among academics across the globe.<sup><a href="#fn8" id="ref8">8</a></sup> Publications addressing automated assessment of cardiac function, 2D measurements, disease detection, and, finally, full report generation point to a clear ambition: the automated echocardiographic report.</p>
+
+  <p>We foresee progress in automated echocardiographic evaluation following the evolution of the electrocardiogram (ECG), which has benefited greatly from automated interpretation. Automated ECG interpretation by computer began in the 1960s, and today tens of millions of ECGs are interpreted by machine.<sup><a href="#fn9" id="ref9">9</a>,<a href="#fn10" id="ref10">10</a>,<a href="#fn11" id="ref11">11</a></sup> The aim of the field of AI in echocardiography is to fully automate the creation of the echocardiographic report — eventually to challenge the necessity or efficacy of human interpretation. Amplifying this mission, the nationwide availability of expertise required to interpret echocardiograms has been in decline, with a -0.4% increase in cardiologists between the years 2016 and 2021.<sup><a href="#fn12" id="ref12">12</a></sup> Moreover, a severe sonographer shortage required to meet imaging demand across the country is growing.<sup><a href="#fn13" id="ref13">13</a></sup> A solution to reduce the delays and variability in echocardiography is needed to address the surplus of mortality linked to cardiovascular disease.<sup><a href="#fn14" id="ref14">14</a>,<a href="#fn15" id="ref15">15</a></sup> Accordingly, automated echocardiographic reporting is regarded as a necessary evolution.</p>
+
+  <h2 id="search">Search strategy and selection criteria</h2>
+  <p>We searched PubMed between January 1, 2018 and September 29, 2025 using free-text terms and author linkage. Search terms focused on the application of AI in echocardiography and ultrasound — for example, "artificial intelligence in echocardiography," "deep learning AND," "machine learning AND," "echocardiographic view classification," "aortic stenosis," "mitral regurgitation," "PAH," "LVH," "HCM," "EF," and "LV dysfunction." We searched conference abstracts from the American Society of Echocardiography, European Society of Echocardiography, and the American College of Cardiology, as well as FDA filings related to SaMD for AI applications in echocardiography. Preference was given to articles with robust citations, transparency around training datasets used, and general acceptance in the field. Only English-language publications were considered.</p>
+
+  <h2 id="history">History of applying computer interpretation to echocardiography</h2>
+  <p>Speckle tracking for assessment of impaired myocardial segments was first published in 1995 and represents one of the early approaches taking advantage of temporal cinegraphic information inherent in echocardiography.<sup><a href="#fn16" id="ref16">16</a></sup> Over the past three decades, computer-vision methods have steadily evolved in parallel with advances in computational capacity and algorithmic design.</p>
+
+  <p>The trajectory of deep learning in this field has followed a predictable but accelerating arc: beginning with 2D segmentation- and classification-driven CNNs (especially UNet- and VGG-backboned models) in 2018–2019; evolving into spatiotemporal 3D CNNs and residual networks (R3D, DeepSenseV3) during 2020–2021 to explicitly model motion and cine loops; proceeding through a hybridization phase around 2022–2023 where CNNs, 3D variants, UNet-style decoders, and rudimentary transformer elements coexisted; and finally arriving in 2024–2025 at the "transformer era," where ViTs, R(2+1)D, SAM, hybrid CNN-Transformer models, diffusion-augmented UNets, and task-specific segmentation architectures dominate research.<sup><a href="#fn17" id="ref17">17</a>,<a href="#fn18" id="ref18">18</a></sup></p>
+
+  <h2 id="challenges">Challenges in applying AI to echocardiography</h2>
+  <p>Despite its widespread use, ultrasound is both literally and statistically noisy, with the interpretation of echocardiography often suffering from poor inter-rater reliability, as reflected in low kappa agreements.<sup><a href="#fn19" id="ref19">19</a>,<a href="#fn20" id="ref20">20</a></sup> Unlike other radiological modalities, echocardiography is characterized by cone-shaped ultrasound beams in which spatial resolution is highest proximally but declines distally. Echocardiography is also cinegraphic, requiring analysis of temporal dynamics that are less relevant to static modalities such as CT or radiography.</p>
+
+  <p>Cardiac motion introduces further complexity: the heart contracts in a three-dimensional helical pattern, causing anatomy to shift within the field of view. Valve leaflets coapt, myocardial segments stretch and contract, chamber sizes oscillate, and blood movement varies dynamically — particularly in the setting of disease. Algorithms designed to consider these changes may struggle in the setting of cardiac arrhythmias, where cardiac cycles are less predictable. Congenital anomalies, tumors, thrombi, rare cardiac diseases, and prostheses pose another difficulty, and speak to the long-tail statistical distribution challenge for algorithmic generalization. Training on simulated and synthetic data is a proposed direction.<sup><a href="#fn21" id="ref21">21</a></sup></p>
+
+  <h2 id="regulatory">Regulatory and reimbursement</h2>
+  <p>Despite echocardiography's worldwide ubiquity, algorithms for automated assessment of echocardiography represent less than 2% of Software as a Medical Device (SaMD)–regulated devices for automated radiological interpretation.<sup><a href="#fn22" id="ref22">22</a></sup> Public FDA records stretch as early as DiaCardio's "Dia-Analysis," a precursor to Philips QLAB cardiac quantification plug-in (K070792), cleared in 2007, and DiaCardio's LVivo EF software (K130779), cleared via 510(k) in 2013.</p>
+
+  <p>Modern challenges include difficulties aligning adaptive or continuously learning algorithms with FDA's traditional static "locked model" clearance paradigm;<sup><a href="#fn23" id="ref23">23</a></sup> ambiguity in how to satisfy "substantial equivalence" or predicate device requirements when newer models diverge substantially in architecture or training data;<sup><a href="#fn24" id="ref24">24</a></sup> the need for transparency, risk management, and explainability under the latest proposed FDA frameworks;<sup><a href="#fn25" id="ref25">25</a></sup> and limited consistency and reporting in FDA summaries about how AI aspects were validated.<sup><a href="#fn26" id="ref26">26</a></sup></p>
+
+  <p>Despite these regulatory challenges, automated interpretation of echocardiography has been embraced within public reimbursement frameworks. In 2021, CPT code 93356 was introduced to reimburse quantitative assessment of myocardial strain imaging — the first major inclusion of an automated image-analysis technique within echocardiography's procedural lexicon. In 2025, the AMA approved Category III CPT code 0932T for automated detection of restrictive cardiomyopathy within echocardiography. Development of future codes to cover broader AI reporting, such as reimbursement for an entire echocardiographic report, is an ongoing discussion.<sup><a href="#fn27" id="ref27">27</a></sup></p>
+
+  <h2 id="trends">Trends of applying AI to the modalities of echocardiography</h2>
+  <p>Coinciding with innovations in deep learning and its applications in adjacent fields of medical imaging,<sup><a href="#fn28" id="ref28">28</a>,<a href="#fn29" id="ref29">29</a>,<a href="#fn30" id="ref30">30</a></sup> deep learning applied to echocardiography has seen rapid progress. Echocardiography is unique among other radiological modalities for its multimodal nature: 1D + time (M-mode, CW-Doppler, PW-Doppler, tissue Doppler); 2D still frames; 2D + time (B-mode); and 2D + time integrating color Doppler representing blood flow direction, velocity, eccentricity, and distance (C-mode).</p>
+
+  <p>Given the plurality of interpretation challenges and opportunities, the trajectory of these applications mirrors the scaling laws of deep learning itself: tasks requiring limited data and modest computational resources were addressed earliest, whereas complex problems demanding large-scale datasets and high-performance GPUs have only recently become tractable.</p>
+
+  <h2 id="steps">Steps to automate the echocardiographic report</h2>
+  <p>Echocardiographic images are obtained by placing an ultrasound probe at various positions on the thoracic cavity and tilting or rotating the transducer axially about the cardiac chamber.<sup><a href="#fn31" id="ref31">31</a></sup> In the United States, echocardiograms are reviewed by two clinicians: first the ultrasound technician, who may be tasked with creating initial measurements, and then the physician qualified to produce an echocardiographic report. Finalizing the report incorporates a multitude of quantitative parameters, independent descriptors of cardiac anatomy, and a report summary.</p>
+
+  <p>We consider the steps to automate the echocardiographic report to begin after the image acquisition phase, and thus firstly must address view classification. This informs spatial and anatomical context for measurements and other qualitative assessments. Proceeding, we then automate quantitative and qualitative assessment. Calculation-derived parameters and measurement-directed disease guidelines can also be referenced. Taken together, these outputs would be used to produce the report verbiage.</p>
+
+  <h2 id="views">View classification &amp; guidance</h2>
+  <p>Classification of echocardiographic views is a foundational task, essential for nearly all downstream deep-learning applications. Large-scale datasets needed for disease-detection models require tens of thousands of consistently labeled views — an effort impractical to perform manually and thus dependent on machine-generated labels. Because view taxonomy is at the core of echocardiography, the problem is both well-suited to classification with deep learning, and models are transferable across datasets, institutions, and downstream tasks.<sup><a href="#fn32" id="ref32">32</a></sup></p>
+
+  <p>The challenge of view classification benefits from the data availability of the standard echocardiogram, which consists of 40–60 DICOMs many of which are cinegraphic — containing collectively thousands of frames. Owing to the low signal-to-noise ratio inherent in echocardiographic imaging, each frame of a cine is visually distinct, so labeling a single cine propagates labels to hundreds of frames.<sup><a href="#fn34" id="ref34">34</a>,<a href="#fn35" id="ref35">35</a></sup></p>
+
+  <p>Diving further into view classification, scientific guidelines are decisive in establishing the optimal echocardiographic views to assess pathology. Certain deep-learning studies have revealed, however, that alternative views may be more informative. Take for instance Vukadinovic and colleagues' findings that in a view-informed attention network, image factors that are beyond those known in disease guidelines are considered.<sup><a href="#fn51">51</a></sup> Morphological factors considered by "black-box" deep-learning models elude researchers and are an active area of investigation, though methods like Grad-CAM visualizations may provide insight into the features models appraise toward their classification.</p>
+
+  <figure>
+    <img src="assets/figures/gradcam-plax-psax.png" alt="Grad-CAM heatmaps overlaid on PLAX and PSAX of AoV echocardiographic views, showing model attention regions.">
+    <figcaption>Grad-CAM visualizations. Attention maps overlaid on parasternal long-axis (PLAX) and parasternal short-axis at the aortic valve (PSAX of AoV) views illustrate the morphological regions deep-learning models appraise during classification.</figcaption>
+  </figure>
+
+  <p>Automated echocardiogram view-guidance systems use deep-learning–based feedback to direct probe orientation toward standardized views, reducing operator variability and improving image quality. Early studies show these systems enable novices to acquire diagnostic-quality images, highlighting their potential to expand echocardiography use in point-of-care and resource-limited settings.<sup><a href="#fn36" id="ref36">36</a></sup></p>
+
+  <h2 id="measurements">Measurements</h2>
+  <p>Proceeding from view classification, quantitative measurement represents the rudimentary function of echocardiographic assessment. Measurements are performed manually and involve linear and area measurements by hand-drawn placement of calipers or hand-planimetry by visual estimation. As a result of human dependence, echocardiographic measurements are variable, time-consuming, and have poor reproducibility.<sup><a href="#fn37" id="ref37">37</a>,<a href="#fn38" id="ref38">38</a></sup></p>
+
+  <p>But measurement variability plagues even the most reputable institutions. In an analysis of 24,948 paired follow-up studies performed at Stanford University and interpreted by board-certified, level-III echocardiographers — each designated in the report as showing "no significant change" — Pillai and colleagues documented systematic variability defined as coefficient of variation (CV): linear measurements exhibited the greatest precision (median CV ~3–5%), variability increased in area-derived measures (~8–12%) and calculated indices (~12–20%), and reached its highest magnitude in Doppler-derived parameters, which frequently exceeded 20–30% CV.<sup><a href="#fn41" id="ref41">41</a></sup></p>
+
+  <p>Studies assessing intraclass correlation coefficients (ICCs) have demonstrated that AI-derived echocardiographic measurements consistently exhibit higher reproducibility than human readers. In particular, when comparing the agreement between AI and a group of humans, the variability is often lower than the variability observed between human readers.<sup><a href="#fn49" id="ref49">49</a>,<a href="#fn50" id="ref50">50</a></sup> This reliability of AI systems to produce stabilized measurements can reduce interobserver variability — particularly on follow-on longitudinal studies — and as such may pave an avenue for an AI core laboratory, where precision is paramount.</p>
+
+  <h2 id="disease">Disease detection</h2>
+  <p>The advantages of deep learning over manual interpretation of echocardiography are most compelling in the setting of evaluation of disease. Deep learning offers an opportunity to learn from image factors that are beyond those known in disease guidelines.<sup><a href="#fn51" id="ref51">51</a></sup></p>
+
+  <p>Pathological signatures are visually distinct in echocardiography and thus well-suited for automated recognition: myocardial tissue impacted by fibrosis and infiltrative amyloid fibril deposition, both often presenting with left-ventricular hypertrophy, appears echogenic relative to healthy myocardium; calcification of valvular leaflets implicated in restrictive valvular motion, valvular sclerosis, and stenosis appears distinctly echogenic; and, because each red blood cell is a specular reflector, C-mode color Doppler appears dense in the setting of valvular regurgitation.</p>
+
+  <p>In the modern era of deep learning, the use of increasingly large datasets has driven a clear trend toward improved performance and robustness in disease-detection models, with AUC reported for detection of clinically significant versus non-significant mitral regurgitation approaching its upper theoretical asymptote. For instance, Vrudhula et al. demonstrated a model trained in excess of 2.5 million DICOMs showed AUCs of 0.998.<sup><a href="#fn52" id="ref52">52</a></sup> The function of disease-classification models has been overwhelmingly toward binary classification of disease, and deep-learning models demonstrated to stratify disease severity reveal the challenge implicit in the intersubjective nature of echocardiographic interpretation.<sup><a href="#fn53" id="ref53">53</a>,<a href="#fn54" id="ref54">54</a></sup></p>
+
+  <h2 id="foundation">Foundation models towards generation of the full echo report</h2>
+  <p>As we progress from view classification, measurement, and disease detection, we move to the foundation model. Over the past decade, studies have explored these expert tasks; however, these image-processing algorithms — while precise in their narrow focus — fall short in mirroring the holistic and interconnected clinical judgment typical of human echocardiographers in producing a full qualitative echocardiographic report.</p>
+
+  <p>Vision-language models are a fundamental advance in the field of deep learning with implications for a host of applications in medical imaging. They promise to encapsulate not just discrete data points typical in traditional machine learning, but also the complex contextual interrelations in clinical diagnosis. Foundation models portend several advantages: they can be trained on large, unlabeled datasets; they can be multi-modal, accepting as input still-frame and cines, exploiting the temporal information embedded between interconnected frames; and they can be trained to consider the plethora of modalities inherent in echocardiography. Concepts exploiting this phenomenon have been demonstrated, with several foundation models published over the past year.<sup><a href="#fn55" id="ref55">55</a>,<a href="#fn56" id="ref56">56</a>,<a href="#fn57" id="ref57">57</a>,<a href="#fn58" id="ref58">58</a></sup> Concepts of the foundation model in echocardiography point not only to increased performance for discrete measurement and regression tasks, disease classification, and severity stratification, but towards a productive step in the creation of the full report. It remains to be seen which pipeline architecture will yield a fully automated echocardiographic report that is accepted into clinical practice, though a qualitative trend suggests the field is moving towards solving an automated report.</p>
+
+  <figure>
+    <img src="assets/figures/scaling-performance.png" alt="Scatter plot of reported performance versus year, with bubble size scaling with training dataset size; trend line slopes upward.">
+    <figcaption>Figure 2 — AI in echocardiography: year vs. reported performance. Each bubble represents one peer-reviewed model; bubble size roughly corresponds to dataset size used in training, color corresponds to target task category, and the trend line indicates the line of best fit of reported performance values, with 95% confidence band illustrated. Validation cohorts also scale with training dataset size.</figcaption>
+  </figure>
+
+  <h2 id="language">Language of the echocardiographic report</h2>
+  <p>Despite efforts to ground many aspects of echocardiographic interpretation in quantifiable endpoints, language is ultimately the medium of echocardiographic reporting. Guidelines have been published around the recommended components of an echocardiographic structured report, though — in the context of language-embedding models — these guidelines also serve a serendipitous secondary purpose of constraining the language diversity used in report text.<sup><a href="#fn6">6</a>,<a href="#fn7">7</a></sup></p>
+
+  <p>For all the focus of language in qualitative interpretation of echocardiographic reporting, peer-reviewed literature exploring metalinguistic trends of structured reports is sparse. Vukadinovic and colleagues report among 275,442 studies from Cedars-Sinai Medical Center, 67,756,876 words are present, and from the same group, Christensen et al. developed a custom domain-specific echocardiography text tokenizer to standardize heterogeneity across reporting language.<sup><a href="#fn59" id="ref59">59</a></sup></p>
+
+  <p>Exploring this concept, we analyzed a subset of data sources from a national ultrasound-diagnostic company collected between 2009 and 2024 containing 82,456 TTE studies, approximating 870,000 descriptors of chambers, valves, and other structures. We indexed each descriptor by the instances it appears and enumerated unique descriptors.</p>
+
+  <figure>
+    <img src="assets/figures/description-frequencies.png" alt="Frequency of descriptors plotted on a log scale showing a long-tailed distribution.">
+    <figcaption>Figure 1 — Long-tailed distribution of descriptors. The phrase "Normal dimensions. No suggestion of mass or thrombus." occurred 122,874 times — the most prevalent. Index 3551 (end of the first quartile) revealed "Moderate aortic stenosis, with a peak gradient of 26&nbsp;mmHg, mean of 12, AVA of 1.2." appearing just 2 times. Index 7102 ("There is posterior mitral leaflet prolapse, with moderate mitral regurgitation and a very eccentric anteroseptally-directed jet.") appears just once. Index 28408 ("Milddilation of aortci root") appears once, likely owing to spelling errors.</figcaption>
+  </figure>
+
+  <p>Language remains the fundamental expression of echocardiographic interpretation, capturing subtleties both explicit and implied. Ultimately, the fully automated echocardiographic report will require not only accurate visual and quantitative inference, but also a mechanism developed on account of great exploration into the lexical diversity and structure of the echocardiographic language. Satisfactorily accomplishing this would result in encoding the latent semantics of diagnostic phrasing, which contains the gradations of certainty, emphasis, and relational context of echocardiographic report language.</p>
+
+  <h2 id="major-windows">Use of major windows to reduce the complexity of echocardiography</h2>
+  <p>It is interesting to note the focus on the use of major echocardiographic views for many of the deep-learning studies reviewed here. As disease can be classified with lower-order information, this points to the potential of a future of a simplified echocardiogram, where the diagnostic information required to assess the complete echocardiogram may be available in a simpler examination.<sup><a href="#fn60" id="ref60">60</a></sup> A suite of algorithms focused entirely on automated interpretation of PLAX may be feasible for production of a preliminary left-sided echocardiographic report,<sup><a href="#fn61" id="ref61">61</a></sup> and may offer a critical avenue in the utility of portable Point-of-Care (POCUS) hardware.</p>
+
+  <p>Evangelos and colleagues showed an AI model can capture HCM and ATTR amyloidosis from simplified echocardiographic examinations (PLAX, PSAX, A4C views only) taken in the emergency setting, demonstrating feasibility in capturing diagnoses of non-acute cardiomyopathies from POCUS examinations which would otherwise be relegated to more comprehensive TTE examinations.<sup><a href="#fn62" id="ref62">62</a></sup> Emerging studies point to the direction of predicting cardiac magnetic resonance (CMR)–derived findings from echocardiographic images.<sup><a href="#fn63" id="ref63">63</a></sup></p>
+
+  <h2 id="trials">Clinical trials of AI echocardiography</h2>
+  <p>Formal clinical trials evaluating AI in production are emerging. Early clinical trials demonstrated feasibility in image-acquisition tasks, concluding minimally trained operators guided by AI produced significantly more adequate standard views. A randomized trial by Narang et al. (Nature, 2023) showed that AI-derived ejection-fraction estimates were non-inferior to sonographer measurements, supporting integration of automation into quantification workflows. Building on these findings, ongoing studies are expanding into broader clinical contexts: NCT05558605 is assessing AI guidance during routine patient care, NCT07144189 is applying AI to the diagnostic challenge of low-gradient aortic stenosis, and the AI-ECHO/ACCEL Lite crossover trial is evaluating workflow efficiency, reproducibility, and interpretation time. Collectively, completed studies confirm that AI can enhance acquisition and quantification, while ongoing trials aim to validate its impact on clinical care and laboratory operations.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Identifier / Trial</th><th>Aim</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>NCT03936413 — Artificial Intelligence in Echocardiography</td><td>Determine whether a Bay Labs AI system can be used by minimally trained operators to obtain diagnostic echo images.</td><td>Registered clinical trial</td></tr>
+      <tr><td>NCT05558605 — AI-Guided Echocardiography to Triage / Manage Patients</td><td>Test AI-based echo guidance in patients with known or suspected heart disease.</td><td>Ongoing trial</td></tr>
+      <tr><td>NCT07144189 — AI Assessment of Low-Gradient Aortic Stenosis Severity</td><td>Evaluate AI methods for grading aortic-stenosis severity in low-gradient cases.</td><td>Registered (echo / valve disease)</td></tr>
+      <tr><td>AI-ECHO / ACCEL Lite — randomized crossover trial</td><td>Evaluate how AI-based automated echo measurements affect sonographer workflow, time, and quality.</td><td>Reported / ongoing</td></tr>
+      <tr><td>Sonographer vs AI for LVEF — blinded randomized trial</td><td>Compare initial LVEF measurement by AI vs sonographers and effect on final cardiologist interpretation.</td><td>Completed, published in <em>Nature</em></td></tr>
+      <tr><td>AI-based Automated Echocardiography (preprint / trial)</td><td>Integrate AI into real clinical echo workflows to evaluate performance and outcomes.</td><td>Preprint / ongoing</td></tr>
+      <tr><td>Novice users acquiring echo with AI guidance</td><td>Assess whether nurses without echo experience can acquire diagnostic images with AI assistance.</td><td>Prospective evaluation</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="commercial">Commercial offerings</h2>
+  <p>Growing market expectation for AI integration into clinical workflows has spurred the emergence of startups seeking to capture its potential value. These efforts span the entire imaging continuum, from acquisition to interpretation. Startups and academic groups represent efforts from the United States, the United Kingdom, Singapore, Israel, Lithuania, France, China, and the United Arab Emirates — reflecting a worldwide "space race" toward automated echocardiography.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Software</th><th>Company</th><th>Country</th><th>Functions</th></tr>
+    </thead>
+    <tbody>
+      <tr class="sub"><td colspan="4">Probe guidance</td></tr>
+      <tr><td>Vscan Air SL w/ Caption AI</td><td>GE</td><td>USA</td><td>Probe placement assistance</td></tr>
+      <tr><td>UltraSight AI Guidance</td><td>UltraSight</td><td>Israel</td><td>Probe placement assistance</td></tr>
+      <tr><td>HeartFocus</td><td>DESKi</td><td>France</td><td>Probe placement assistance</td></tr>
+      <tr class="sub"><td colspan="4">Interpretation</td></tr>
+      <tr><td>Libby Echo:Prio</td><td>DyadMed</td><td>USA</td><td>EF — company defunct</td></tr>
+      <tr><td>LVivo EF</td><td>DiaAnalysis</td><td>Israel</td><td>EF and view classification (acquired by Philips)</td></tr>
+      <tr><td>Philips / Tomtec</td><td>Philips</td><td>USA</td><td>3D echo, multimodality integration</td></tr>
+      <tr><td>GE EchoPAC</td><td>GE</td><td>USA</td><td>Automated measurements, reporting</td></tr>
+      <tr><td>Imacor</td><td>Imacor</td><td>USA</td><td>Myocardial strain, 3D TEE, hemodynamics — ICU-focused</td></tr>
+      <tr><td>InVision Precision Cardiac Amyloid</td><td>InVision Medical</td><td>USA</td><td>Amyloid detection, EF analysis</td></tr>
+      <tr class="highlight"><td>EchoMeasure</td><td>iCardio.ai</td><td>USA</td><td>View classification, quality, LV/RV/AS measurements</td></tr>
+      <tr><td>EchoApex</td><td>Siemens Healthineers</td><td>USA</td><td>Foundation model — view classification, LV measurements, EF</td></tr>
+      <tr><td>Us2.ai</td><td>Us2.ai</td><td>Singapore</td><td>View classification, quality, chamber, Doppler measurements</td></tr>
+      <tr><td>EchoGo</td><td>Ultromics</td><td>UK</td><td>HFpEF, amyloid, GLS analysis, reporting</td></tr>
+      <tr><td>Ventripoint VMS</td><td>Ventripoint</td><td>Canada</td><td>2D/3D reconstruction, EF, single ventricle</td></tr>
+      <tr><td>EchoConfidence</td><td>MyCardium</td><td>UK</td><td>View classification, chamber, Doppler measurements</td></tr>
+      <tr><td>EchoNous Kosmos</td><td>EchoNous</td><td>USA</td><td>Real-time labeling, auto measurement (POCUS)</td></tr>
+      <tr><td>Ligence Heart</td><td>Ligence</td><td>Lithuania</td><td>View classification, chamber, Doppler measurements</td></tr>
+      <tr><td>EchoSolv AS</td><td>EchoIQ</td><td>Australia</td><td>Aortic-stenosis detection (valve phenotyping)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+
+  <h3 id="all-models">Reported models, 2018–2025 (Table 3)</h3>
+  <div class="table-wrap">
+  <table class="table-publications">
+    <thead>
+      <tr>
+        <th>Paper</th>
+        <th>Year</th>
+        <th>Problem</th>
+        <th>Target task</th>
+        <th>Architecture</th>
+        <th>Perspective</th>
+        <th>Studies</th>
+        <th>Videos</th>
+        <th>Metric</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Madani, et al.</td><td>2018</td><td>View and Guidance</td><td>View Classification</td><td>UNet</td><td>View prediction</td><td>267</td><td>—</td><td>ACC</td><td>98</td></tr>
+      <tr><td>Madani, et al.</td><td>2018</td><td>Disease</td><td>LVH</td><td>UNet</td><td>View prediction</td><td>455</td><td>—</td><td>ACC</td><td>91.2</td></tr>
+      <tr><td>Zhang, et al.</td><td>2018</td><td>View and Guidance</td><td>View Classification</td><td>UNet, VGG13</td><td>A2C, A4C, PLAX, PSAX, A3C</td><td>227</td><td>—</td><td>ACC</td><td>84</td></tr>
+      <tr><td>Zhang, et al.</td><td>2018</td><td>Disease</td><td>HCM</td><td>UNet, VGG13</td><td>A2C, A4C, PLAX, PSAX, A3C</td><td>2,739</td><td>—</td><td>AUC</td><td>93</td></tr>
+      <tr><td>Zhang, et al.</td><td>2018</td><td>Disease</td><td>Amyloid</td><td>UNet, VGG13</td><td>A2C, A4C, PLAX, PSAX, A3C</td><td>3,071</td><td>—</td><td>AUC</td><td>87</td></tr>
+      <tr><td>Zhang, et al.</td><td>2018</td><td>Disease</td><td>PAH</td><td>UNet, VGG13</td><td>A2C, A4C, PLAX, PSAX, A3C</td><td>983</td><td>—</td><td>AUC</td><td>85</td></tr>
+      <tr><td>Leclerc, et al.</td><td>2019</td><td>Measurement</td><td>LV Function</td><td>UNet</td><td>A2C, A4C</td><td>500</td><td>—</td><td>MCC</td><td>80</td></tr>
+      <tr><td>Asch, et al.</td><td>2019</td><td>Measurement</td><td>LV Function</td><td>CNN</td><td>A4C</td><td>50,000</td><td>—</td><td>R²</td><td>95</td></tr>
+      <tr><td>Ouyang, et al.</td><td>2020</td><td>Measurement</td><td>LV Function</td><td>DeepSenseV3, R3D</td><td>A4C</td><td>10,030</td><td>10,030</td><td>R²</td><td>81</td></tr>
+      <tr><td>Jafari, et al.</td><td>2020</td><td>Enhancement</td><td>—</td><td>UNet, CycleGan</td><td>A2C</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Wang, et al.</td><td>2021</td><td>Disease</td><td>VSD, ASD</td><td>—</td><td>Pediatric (multiview)</td><td>1,308</td><td>6,540</td><td>AUC</td><td>94.2</td></tr>
+      <tr><td>Huang, et al.</td><td>2021</td><td>Disease</td><td>Aortic Stenosis</td><td>ResNet</td><td>PLAX, PSAX</td><td>2,905</td><td>—</td><td>AUC</td><td>91</td></tr>
+      <tr><td>Degerli, et al.</td><td>2021</td><td>Pathology</td><td>MI</td><td>UNet</td><td>A4C</td><td>1,000</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Shad, et al.</td><td>2021</td><td>Disease</td><td>RV Function</td><td>ResNet</td><td>A4C</td><td>723</td><td>1,223</td><td>AUC</td><td>72.9</td></tr>
+      <tr><td>Ulloa, et al.</td><td>2021</td><td>Mortality</td><td>Mortality</td><td>—</td><td>View agnostic</td><td>34,362</td><td>812,278</td><td>AUC</td><td>83</td></tr>
+      <tr><td>Upton, et al.</td><td>2022</td><td>Disease</td><td>CAD</td><td>UNet</td><td>A2C, A3C, A4C</td><td>1,498</td><td>—</td><td>AUC</td><td>93.4</td></tr>
+      <tr><td>Duffy, et al.</td><td>2021</td><td>Disease</td><td>Amyloid</td><td>R3D</td><td>PLAX</td><td>24,804</td><td>—</td><td>AUC</td><td>79</td></tr>
+      <tr><td>Duffy, et al.</td><td>2021</td><td>Disease</td><td>HCM</td><td>R3D</td><td>PLAX</td><td>24,804</td><td>—</td><td>AUC</td><td>89</td></tr>
+      <tr><td>Tromp, et al.</td><td>2022</td><td>Disease</td><td>—</td><td>CNN</td><td>A2C, PLAX, A4C</td><td>602</td><td>—</td><td>AUC</td><td>—</td></tr>
+      <tr><td>Upton, et al.</td><td>2022</td><td>Disease</td><td>—</td><td>CNN</td><td>A4C</td><td>578</td><td>—</td><td>AUC</td><td>90</td></tr>
+      <tr><td>Tromp, et al.</td><td>2022</td><td>Disease</td><td>—</td><td>CNN</td><td>A2C, PLAX, A4C, 2D other</td><td>1,145</td><td>—</td><td>AUC</td><td>90</td></tr>
+      <tr><td>Wessler, et al.</td><td>2023</td><td>Disease</td><td>AS</td><td>—</td><td>PLAX</td><td>577</td><td>10,253</td><td>AUC</td><td>86</td></tr>
+      <tr><td>Akerman, et al.</td><td>2023</td><td>Disease</td><td>HFpEF</td><td>ResNet</td><td>A4C</td><td>6,756</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Holste, et al.</td><td>2023</td><td>Disease</td><td>AS</td><td>R3D</td><td>PLAX</td><td>20,500</td><td>20,500</td><td>AUC</td><td>94</td></tr>
+      <tr><td>Akerman, et al.</td><td>2023</td><td>Disease</td><td>HFpEF / HFrEF</td><td>—</td><td>A4C</td><td>7,249</td><td>7,249</td><td>AUC</td><td>95</td></tr>
+      <tr><td>Holste, et al.</td><td>2023</td><td>Disease</td><td>—</td><td>—</td><td>PLAX</td><td>5,257</td><td>17,570</td><td>AUC</td><td>95</td></tr>
+      <tr><td>Chen, et al.</td><td>2023</td><td>Measurement</td><td>—</td><td>—</td><td>A4C, A2C, PW-Doppler Transmitral, CW-Doppler Transtricuspid, Tissue Doppler IVS, Tissue Doppler Lateral Wall</td><td>2,238</td><td>18,992</td><td>ACC</td><td>92</td></tr>
+      <tr><td>Reddy, et al.</td><td>2023</td><td>Pediatrics</td><td>LV Function</td><td>—</td><td>A4C, PSAX</td><td>4,467</td><td>7,643</td><td>R²</td><td>77</td></tr>
+      <tr><td>Jiang, et al.</td><td>2024</td><td>View and Guidance</td><td>View Classification</td><td>—</td><td>PLAX, PSAX-AV, PSAX-MV</td><td>110</td><td>151,000</td><td>—</td><td>—</td></tr>
+      <tr><td>Alajrami, et al.</td><td>2024</td><td>Segmentation</td><td>LV Function</td><td>MCD U-Net</td><td>A4C</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Steffner, et al.</td><td>2024</td><td>View and Guidance</td><td>View Classification</td><td>R(2+1)D</td><td>TEE (8 views)</td><td>2,967</td><td>2,967</td><td>AUC</td><td>91.9</td></tr>
+      <tr><td>Amadou, et al.</td><td>2024</td><td>View and Guidance, Measurement, Disease</td><td>View Classification, Segmentation, Pathology, LV Function</td><td>—</td><td>View agnostic to 18 views</td><td>26,704</td><td>450,338</td><td>AUC</td><td>93</td></tr>
+      <tr><td>Zhang, et al.</td><td>2024</td><td>Measurement</td><td>LV Function, Measurements</td><td>ViT, STFF-Net</td><td>View agnostic to 12 views</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Alvén, et al.</td><td>2024</td><td>Measurement</td><td>LV Function</td><td>I3D</td><td>A2C, A3C, A4C, PLAX</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Fadnavis, et al.</td><td>2024</td><td>Disease</td><td>PAH</td><td>ViT-B/16</td><td>—</td><td>6,500</td><td>286,080</td><td>AUC</td><td>80</td></tr>
+      <tr><td>Meyer, et al.</td><td>2024</td><td>Foundation</td><td>—</td><td>ViT</td><td>—</td><td>28,000</td><td>—</td><td>mAP</td><td>90.73</td></tr>
+      <tr><td>Kim, et al.</td><td>2024</td><td>Foundation</td><td>—</td><td>ViT</td><td>A2C, A4C, PLAX, PSAX, "Others"</td><td>6,500</td><td>286,080</td><td>—</td><td>—</td></tr>
+      <tr><td>Vukadinovic, et al.</td><td>2024</td><td>Foundation, View and Guidance, Measurement, Disease, Report Generation</td><td>Foundation, View Classification, Out of Domain, Pathology, Report Generation</td><td>mViT</td><td>View agnostic</td><td>275,442</td><td>12,124,168</td><td>AUC</td><td>92</td></tr>
+      <tr><td>Zhang, et al.</td><td>2024</td><td>Foundation</td><td>Segmentation</td><td>—</td><td>A2C, A4C, PLAX, PSAX, others</td><td>7,243</td><td>525,328</td><td>AUC</td><td>93.1</td></tr>
+      <tr><td>Ravishankar, et al.</td><td>2023</td><td>Foundation</td><td>Segmentation</td><td>ViT-B</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Christensen, et al.</td><td>2024</td><td>Foundation, View and Guidance, Measurement, Disease, Report Generation</td><td>Foundation, View Classification, Out of Domain, Pathology, Report Generation</td><td>ConvNeXt</td><td>View agnostic</td><td>224,685</td><td>1,032,975</td><td>AUC</td><td>90</td></tr>
+      <tr><td>Huang, et al.</td><td>2024</td><td>Measurement</td><td>LV Function</td><td>—</td><td>A4C</td><td>—</td><td>—</td><td>AUC</td><td>88</td></tr>
+      <tr><td>Vrudhula, et al.</td><td>2024</td><td>Disease</td><td>MR</td><td>R(2+1)D</td><td>A4C with color Doppler</td><td>58,614</td><td>—</td><td>AUC</td><td>99.8</td></tr>
+      <tr><td>Sanabria, et al.</td><td>2024</td><td>Disease</td><td>AS</td><td>LightGBM</td><td>—</td><td>—</td><td>—</td><td>AUC</td><td>83</td></tr>
+      <tr><td>Xie, et al.</td><td>2024</td><td>Disease</td><td>TR</td><td>—</td><td>CW-Doppler TR</td><td>11,654</td><td>—</td><td>AUC</td><td>84</td></tr>
+      <tr><td>Holste, et al.</td><td>2025</td><td>Foundation, View and Guidance, Measurement, Disease, Report Generation</td><td>Foundation, View Classification, Out of Domain, Pathology, Report Generation</td><td>CNN-Transformer hybrid</td><td>—</td><td>32,265</td><td>1,200,000</td><td>AUC</td><td>91</td></tr>
+      <tr><td>Vrudhula, et al.</td><td>2025</td><td>Disease</td><td>MR</td><td>R(2+1)D CNN</td><td>A4C with color Doppler</td><td>47,312</td><td>2,079,898</td><td>AUC</td><td>95.1</td></tr>
+      <tr><td>Chao, et al.</td><td>2025</td><td>Segmentation</td><td>Segmentation</td><td>—</td><td>A4C, A2C</td><td>—</td><td>—</td><td>R²</td><td>96.7</td></tr>
+      <tr><td>Sahashi, et al.</td><td>2025</td><td>Measurement</td><td>LV Function, Measurements</td><td>DeepLabv3</td><td>PLAX, A4C, A2C, PSAX-A Zoomed Out, CW-Doppler, PW-Doppler</td><td>10,030+</td><td>155,215</td><td>AUC</td><td>0.97</td></tr>
+      <tr><td>Park, et al.</td><td>2025</td><td>Disease</td><td>AS</td><td>3D-CNN and SegFormer</td><td>PLAX, PSAX-A</td><td>30,000</td><td>877,983</td><td>AUC</td><td>—</td></tr>
+      <tr><td>Park, et al.</td><td>2025</td><td>Disease</td><td>AS</td><td>3D-CNN and SegFormer</td><td>PLAX, PSAX-A, Ao CW-Doppler, Ao PW-Doppler, LVOT PW-Doppler</td><td>30,000</td><td>877,983 (likely overlapping)</td><td>AUC</td><td>0.97</td></tr>
+    </tbody>
+  </table>
+</div>
+<figcaption class="table-caption">Table 3. Publications with independently reported models — year of publication, problem category, target task, deep learning architecture, echocardiographic perspective, number of unique TTE studies used, number of unique cine DICOMs used (if reported), reported performance metric, and performance.</figcaption>
+<p style="font-size:.85rem;color:var(--ink-mute);line-height:1.55;margin-top:.6em"><em>ASD = atrial septal defect, VSD = ventricular septal defect, LVH = left ventricular hypertrophy, HCM = hypertrophic cardiomyopathy, PAH = pulmonary arterial hypertension, MI = myocardial infarction, AS = aortic stenosis, MR = mitral regurgitation, TR = tricuspid regurgitation, CAD = coronary artery disease, HFpEF = heart failure with preserved ejection fraction, HFrEF = heart failure with reduced ejection fraction, A2C = apical 2-chamber, A3C = apical 3-chamber, A4C = apical 4-chamber, PLAX = parasternal long axis, PSAX = parasternal short axis, PSAX-AV = parasternal short axis at aortic valve level, PSAX-MV = parasternal short axis at mitral valve level, TEE = transesophageal echocardiography, LV = left ventricle, LVOT = left ventricular outflow tract, IVS = interventricular septum, Ao = aortic, PW-Doppler = pulsed-wave Doppler, CW-Doppler = continuous-wave Doppler, ACC = accuracy, AUC = area under the ROC curve, MCC = mean correlation coefficient, R² = coefficient of determination, mAP = mean average precision.</em></p>
+
+
+  <h2 id="limitations">Study limitations</h2>
+  <p>This review is subject to several limitations. First, as reporting standards for AI studies in echocardiography are heterogeneous, performance metrics are not directly comparable across studies, and heterogeneity in dataset size, curation, and external validation limits generalizability. Second, most published studies remain retrospective and rely on single-center or convenience datasets; thus this review does not assess concerns regarding bias, robustness across imaging vendors, and applicability to diverse patient populations. Finally, the rapidly evolving nature of the field means that new methods and commercial offerings may emerge after the time of writing.</p>
+
+  <h2 id="conclusion">Conclusion</h2>
+  <p>In sum, the standardized structure of echocardiographic imaging and reports, combined with the ubiquity of echocardiography and its central role in cardiovascular care, have made it a focus of intense global academic activity. In this review, we have traced the evolution of artificial intelligence in echocardiography from nascent myocardial-motion analysis to multimodal foundation models capable of parsing cine loops, quantifying disease, and generating structured text. The next frontier lies in unifying these elements to capture not only anatomy, but intent, emphasis, and uncertainty.</p>
+
+  <blockquote>The aspiration of the automated echocardiographic report speaks to the arc of artificial intelligence drawing ever closer to the art of echocardiographic interpretation. Yet in doing so, it invites a deeper reflection on the spirit of our own interpretive art, and thus brings into question how narrow the gap between man and machine may truly be.</blockquote>
+
+  <div class="disclosure">
+    Disclosure. Joseph&nbsp;Z.&nbsp;Sokol and Roman&nbsp;A.&nbsp;Sandler, PhD are co-founders of iCardio.ai, an artificial-intelligence company, and hold equity. J.S. and R.S. consult for Abbott Laboratories and receive funding from the Roddenberry Foundation. The authors thank Anna Gilgur for organization of literature and Ibiye Adoki, MD for review.
+  </div>
+
+  <section class="footnotes">
+    <h2>References</h2>
+    <ol>
+      <li id="fn1">Lang RM, Badano LP, Mor-Avi V, et al. Recommendations for cardiac chamber quantification by echocardiography in adults. <em>European Heart Journal–Cardiovascular Imaging</em> 16(3):233–271, 2015.</li>
+      <li id="fn2">Doherty JU, et al. ACC/AATS/AHA/ASE/ASNC/HRS/SCAI/SCCT/SCMR/STS 2019 appropriate use criteria for multimodality imaging in nonvalvular heart disease. <em>J Am Coll Cardiol</em> 73.4 (2019): 488–516.</li>
+      <li id="fn3">Pearlman AS, et al. Evolving trends in the use of echocardiography. <em>J Am Coll Cardiol</em> 49.23 (2007): 2283–2291.</li>
+      <li id="fn4">Khan HA, et al. Can hospital rounds with pocket ultrasound by cardiologists reduce standard echocardiography? <em>Am J Med</em> 127.7 (2014): 669-e1.</li>
+      <li id="fn5">Mitchell C, et al. Guidelines for performing a comprehensive transthoracic echocardiographic examination in adults — ASE recommendations. <em>J Am Soc Echocardiogr</em> 32.1 (2019): 1–64.</li>
+      <li id="fn6">Taub CC, et al. Guidelines for the Standardization of Adult Echocardiography Reporting — ASE recommendations. <em>J Am Soc Echocardiogr</em> 38.9 (2025): 735–774.</li>
+      <li id="fn7">Gardin JM, et al. Recommendations for a standardized report for adult transthoracic echocardiography. <em>J Am Soc Echocardiogr</em> 15.3 (2002): 275–290.</li>
+      <li id="fn8">Jiang L, Zuo HJ, Chen C. Artificial intelligence in echocardiography: applications and future directions. <em>Fundamental Research</em> (2025).</li>
+      <li id="fn9">Pipberger HV, Arms RJ, Stallmann FW. Automatic screening of normal and abnormal electrocardiograms by means of digital electronic computer. <em>Proc Soc Exp Biol Med</em> 1961;106:130–132.</li>
+      <li id="fn10">Ginzton LE, Laks MM. Computer-aided ECG interpretation. In: <em>Images, Signals and Devices.</em> Springer (1987): 46–53.</li>
+      <li id="fn11">Schläpfer J, Wellens HJ. Computer-interpreted electrocardiograms: benefits and limitations. <em>J Am Coll Cardiol</em> 70.9 (2017): 1183–1192.</li>
+      <li id="fn12">AAMC, Physician Specialty Data Report (2021).</li>
+      <li id="fn13">Murphey S. Work-related musculoskeletal disorders in sonography (2017): 354–369.</li>
+      <li id="fn14">Cioffi G, et al. Functional mitral regurgitation predicts 1-year mortality in elderly patients with systolic chronic heart failure. <em>Eur J Heart Fail</em> (2005).</li>
+      <li id="fn15">Li SX, et al. Trends in utilization of aortic-valve replacement for severe aortic stenosis. <em>JACC</em> 79.9 (2022).</li>
+      <li id="fn16">Bohs LN, Friemel BH, Trahey GE. Experimental velocity profiles and volumetric flow via two-dimensional speckle tracking. <em>Ultrasound Med Biol</em> 21.7 (1995): 885–898.</li>
+      <li id="fn17">He K, et al. Transforming medical imaging with Transformers — a comparative review.</li>
+      <li id="fn18">Sanjeevi G, et al. Deep-learning supported echocardiogram analysis: a comprehensive review. <em>Artificial Intelligence in Medicine</em> 151 (2024): 102866.</li>
+      <li id="fn19">Cecaro F. What are the components that contribute to variability in echocardiographic measurements in aortic stenosis? (2013).</li>
+      <li id="fn20">Pellikka PA, et al. Variability in ejection fraction measured by echocardiography, gated SPECT, and CMR. <em>JAMA Network Open</em> 1.4 (2018): e181456.</li>
+      <li id="fn21">Al Khalil Y, et al. On the usability of synthetic data for improving robustness of deep-learning-based segmentation of cardiac MRI. <em>Medical Image Analysis</em> 84 (2023): 102688.</li>
+      <li id="fn22">Health AI Register. Radiology AI Products. <a href="https://healthairegister.com/radiology/products" target="_blank" rel="noopener">healthairegister.com</a></li>
+      <li id="fn23">U.S. FDA. Artificial Intelligence / Machine Learning (AI/ML)-Based Software as a Medical Device (SaMD).</li>
+      <li id="fn24">Santra S, et al. Navigating regulatory and policy challenges for AI-enabled combination devices. <em>Frontiers in Medical Technology</em> 6 (2024): 1473350.</li>
+      <li id="fn25">U.S. FDA. AI/ML-Based SaMD: Proposed Regulatory Framework. (2023).</li>
+      <li id="fn26">Muralidharan V, et al. A scoping review of reporting gaps in FDA-approved AI medical devices. <em>NPJ Digital Medicine</em> 7.1 (2024): 273.</li>
+      <li id="fn27">Dogra S, Silva E, Rajpurkar P. Reimbursement in the age of generalist radiology AI. <em>npj Digital Medicine</em> 7.1 (2024): 1–5.</li>
+      <li id="fn28">Liu X, et al. A comparison of deep-learning performance against health-care professionals in detecting diseases from medical imaging. <em>Lancet Digital Health</em> (2019).</li>
+      <li id="fn29">Esteva A, et al. Dermatologist-level classification of skin cancer with deep neural networks. <em>Nature</em> 542 (2017): 115–118.</li>
+      <li id="fn30">McKinney SM, et al. International evaluation of an AI system for breast-cancer screening. <em>Nature</em> 577 (2020): 89–94.</li>
+      <li id="fn31">Mitchell C, et al. (see ref. 5).</li>
+      <li id="fn32">Mitchell C, et al. (see ref. 5).</li>
+      <li id="fn34">Madani A, et al. Fast and accurate view classification of echocardiograms using deep learning. <em>NPJ Digital Medicine</em> 1.1 (2018): 6.</li>
+      <li id="fn35">Zhang J, et al. Fully automated echocardiogram interpretation in clinical practice. <em>Circulation</em> 138.16 (2018): 1623–1635.</li>
+      <li id="fn36">Narang A, et al. Utility of a deep-learning algorithm to guide novices to acquire echocardiograms for limited diagnostic use. <em>JAMA Cardiology</em> 6.6 (2021): 624–632.</li>
+      <li id="fn37">Anderson DR, et al. Differences in echocardiography interpretation techniques among trainees and expert readers. <em>J Echocardiogr</em> 19 (2021): 222–231.</li>
+      <li id="fn38">Virnig BA, et al. Trends in the Use of Echocardiography (2014).</li>
+      <li id="fn41">Pillai B, et al. Precision of echocardiographic measurements. <em>J Am Soc Echocardiogr</em> 37.5 (2024): 562–563.</li>
+      <li id="fn49">Sahashi Y, et al. Artificial-intelligence automation of echocardiographic measurements. <em>medRxiv</em> (2025).</li>
+      <li id="fn50">Lafitte S, et al. Integrating AI into an echocardiography department. <em>Archives of Cardiovascular Diseases</em> (2025).</li>
+      <li id="fn51">Akerman A, et al. Comparison of clinical algorithms and AI applied to an echocardiogram to categorize HFpEF risk. <em>J Am Coll Cardiol</em> 81.8 Suppl. (2023): 360.</li>
+      <li id="fn52">Vrudhula A, et al. High-throughput deep-learning detection of mitral regurgitation. <em>Circulation</em> 150.12 (2024): 923–933.</li>
+      <li id="fn53">Poterucha T, et al. DELINEATE-MR: deep learning for automated assessment of mitral regurgitation. <em>J Am Coll Cardiol</em> 83.13 Suppl. (2024): 2124.</li>
+      <li id="fn54">Uretsky S, et al. Discordance between echocardiography and MRI in mitral-regurgitation severity. <em>J Am Coll Cardiol</em> 65.11 (2015): 1078–1088.</li>
+      <li id="fn55">Amadou AA, et al. EchoApex: a general-purpose vision foundation model for echocardiography. <em>arXiv</em> 2410.11092 (2024).</li>
+      <li id="fn56">Zhang Z, et al. Echo-Vision-FM: pre-training and fine-tuning framework for echocardiogram video vision foundation model. <em>medRxiv</em> (2024).</li>
+      <li id="fn57">Kim S, et al. EchoFM: foundation model for generalizable echocardiogram analysis. <em>arXiv</em> 2410.23413 (2024).</li>
+      <li id="fn58">Holste G, et al. PanEcho. <em>medRxiv</em> (2025).</li>
+      <li id="fn59">Christensen M, et al. Vision–language foundation model for echocardiogram interpretation. <em>Nature Medicine</em> 30.5 (2024): 1481–1488.</li>
+      <li id="fn60">Bughrara N, et al. Comparison of qualitative information obtained with subcostal-only and focused TTE examinations. <em>Can J Anaesth</em> 69.2 (2022): 196–204.</li>
+      <li id="fn61">Ulloa Cerna AE, et al. Deep-learning-assisted analysis of echocardiographic videos improves predictions of all-cause mortality. <em>Nature Biomedical Engineering</em> 5.6 (2021): 546–554.</li>
+      <li id="fn62">Oikonomou EK, et al. AI-guided detection of under-recognised cardiomyopathies on point-of-care cardiac ultrasonography. <em>Lancet Digital Health</em> 7.2 (2025): e113–e123.</li>
+      <li id="fn63">Sahashi Y, et al. Using deep learning to predict CMR findings from echocardiography videos. <em>J Am Soc Echocardiogr</em> (2025).</li>
+    </ol>
+  </section>
+  </div><!-- /.article__body -->
+
+</article>
+
+<footer>
+  <div class="container">
+    <span>© 2026 — Joseph&nbsp;Z.&nbsp;Sokol</span>
+    <span>Los Angeles, CA</span>
+  </div>
+</footer>
+
+</body>
+</html>

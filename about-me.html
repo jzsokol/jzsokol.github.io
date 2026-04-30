@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>About Joseph Z. Sokol — Joseph Z. Sokol</title>
+<meta name="description" content="An internet capsule for all things Joseph Z. Sokol — entrepreneur, scientist, writer, classical pianist, ex-semi-pro cyclist." />
+<meta name="theme-color" content="#FAFAF5" />
+<link rel="icon" type="image/png" href="assets/256-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0F172A;--ink-soft:rgba(15,23,42,.72);--ink-mute:rgba(15,23,42,.55);
+    --rule:rgba(15,23,42,.10);--paper:#FAFAF5;--card:#FFFFFF;
+    --accent:#1E3A8A;--accent-hover:#1E40AF;--accent-bg:#EEF2FF;--cardio:#DC2626;
+    --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0} html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:rgba(30,58,138,.18);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-hover)}
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;letter-spacing:-0.012em;margin:0}
+  p{margin:0 0 1em}
+  .topbar{border-bottom:1px solid var(--rule);background:rgba(250,250,250,.85);backdrop-filter:saturate(160%) blur(10px);position:sticky;top:0;z-index:10}
+  .topbar__inner{max-width:780px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .topbar__brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-0.01em;color:var(--ink)}
+  .topbar__brand img{width:32px;height:32px;border-radius:999px;object-fit:cover;object-position:center 18%;background:#EEF2FF;border:1px solid var(--rule)}
+  .topbar__back{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .topbar__back:hover{color:var(--accent)}
+  .article{max-width:780px;margin:0 auto;padding:48px 24px 64px}
+  .article__eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;font-weight:500}
+  .article__title{font-family:var(--sans);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.02;letter-spacing:-0.028em;color:var(--ink);margin:0 0 18px}
+  .article__deck{font-size:1.12rem;line-height:1.55;color:var(--ink-soft);max-width:64ch;margin:0 0 24px}
+  .article__byline{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 4px}
+  .article__byline strong{color:var(--ink);font-weight:600}
+  .article__meta{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:14px 0 18px;margin:24px 0 36px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  .article__cover{margin:0 0 36px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff}
+  .article__cover img{width:100%;height:auto;display:block}
+  .article h2{font-family:var(--sans);font-weight:600;letter-spacing:-0.014em;font-size:1.45rem;line-height:1.2;color:var(--ink);margin:2.4em 0 .7em;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+  .article h3{font-family:var(--sans);font-weight:600;letter-spacing:-0.008em;font-size:1.1rem;line-height:1.3;color:var(--accent);margin:1.8em 0 .5em}
+  .article p{font-family:var(--sans);font-size:1.04rem;line-height:1.7;color:var(--ink);margin:0 0 1.1em}
+  .article p strong{font-weight:600}
+  .article a{color:var(--accent);border-bottom:1px solid rgba(30,58,138,.35)}
+  .article a:hover{border-bottom-color:var(--accent)}
+  .article blockquote{font-family:var(--sans);font-weight:500;font-size:1.18rem;line-height:1.45;color:var(--ink);border-left:3px solid var(--cardio);padding:6px 0 6px 18px;margin:1.8em 0}
+  .article ol li,.article ul li{font-size:1.04rem;line-height:1.7;color:var(--ink);margin-bottom:.5em}
+  .article ol{padding-left:1.4em}
+  .article figure{margin:2em 0;text-align:center}
+  .article figure img{max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .article figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute);margin-top:14px;line-height:1.6;text-align:left;border-left:2px solid var(--accent);padding:4px 0 4px 12px}
+  .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.5em 0}
+  .photo-grid img{width:100%;height:auto;border-radius:8px;object-fit:cover;display:block}
+  .photo-grid .portrait{grid-row:span 2;aspect-ratio:3/4}
+  .photo-grid .landscape{aspect-ratio:4/3}
+  .photo-caption{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);text-align:center;margin-top:8px;font-style:normal}
+  .footnotes{margin-top:48px;padding-top:24px;border-top:1px solid var(--rule);font-size:.86rem;color:var(--ink-soft)}
+  .footnotes p{font-size:.86rem;line-height:1.55}
+  footer{border-top:1px solid var(--rule);margin-top:0;padding:32px 0 48px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  footer .container{max-width:780px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--ink-mute)} footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__brand" href="index.html">
+      <img src="assets/wiki_profile.png" alt="">
+      <span>Joseph&nbsp;Z.&nbsp;Sokol</span>
+    </a>
+    <a class="topbar__back" href="index.html">← Home</a>
+  </div>
+</nav>
+<article class="article">
+  <span class="article__eyebrow">Personal · About</span>
+  <h1 class="article__title">About Joseph Z. Sokol</h1>
+  
+  <p class="article__byline"><strong>Joseph&nbsp;Z.&nbsp;Sokol</strong></p>
+  <div class="article__meta"><span>August 2019 · Updated 2026</span><span>About · Author</span></div>
+  
+  
+  <div class="article__cover" style="display:flex;align-items:center;justify-content:center;background:#fff;padding:24px 0">
+    <img src="assets/wiki_profile.png" alt="Joseph Z. Sokol" style="max-width:380px;width:80%;border:0">
+  </div>
+
+  <h2>Who I am</h2>
+  <p>Hi! I am Joseph Sokol. My work expertise is focused on the application of artificial intelligence in cardiology, scientific, technical and commercial. But, more than that, I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-semi-pro cyclist. I am the founder of <a href="https://iCardio.ai" target="_blank" rel="noopener">iCardio.ai</a> and <a href="https://olehpay.co.il" target="_blank" rel="noopener">OlehPay</a>.</p>
+  <p>I have taken an atypical path, having dropped out of University to pursue entrepreneurship. I've lived in Spain and Israel, there I taught myself two languages (Spanish, Hebrew). Since my teens, I've passionately pursued classical piano, delving into Chopin, Debussy and other Romantics. At 17, I competed in category 1/2 pro cycling races in California, despite being a Type 1 diabetic. I hold a unique and optimistic perspective on life.</p>
+
+  <h2>Projects</h2>
+
+  <h3><a href="https://icardio.ai" target="_blank" rel="noopener">iCardio.ai</a> — Los Angeles, California</h3>
+  <p>In October of 2019, I founded iCardio.ai, along with Dr. Joshua Penn and Dr. Roman Sandler. iCardio.ai is a Los Angeles-based deep learning startup for heart ultrasound analysis. iCardio.ai's core AI product, the iCardio.ai Brain v1, was trained on its internal dataset of over +200 million images, making it one of the largest-scale radiological AI products in the world. iCardio.ai has worked with some of the largest Ultrasound vendors including GE Healthcare, Butterfly Network, UltraLinQ, and Viz.ai, to deliver its technology to clinicians around the globe. In February of 2024, iCardio.ai's Aortic Stenosis detection tool was awarded Breakthrough Device Designation by the FDA.</p>
+
+  <h3><a href="https://olehpay.co.il" target="_blank" rel="noopener">OlehPay</a> — Jerusalem, Israel</h3>
+  <p>Before then, at the age of 19, I founded OlehPay, from Jerusalem, Israel. OlehPay is a privately held, multinational Financial Technology company operating an online remittance platform, and serves as a digital alternative for traditional money transfer and currency exchange. The OlehPay platform primarily serves the American expat community within Israel with a large focus on the automation of remitting pension payments, social security deposits, American-based salaries, and Israeli-based mortgage payments. OlehPay also provides services for funding down payments for property purchases in Israel.</p>
+
+  <h3><a href="https://bsd.enterprises" target="_blank" rel="noopener">BSD Enterprises</a> — Los Angeles, California</h3>
+  <p>I am advisor to David Gershov of BSD Enterprises, a private investment boutique out of Los Angeles, California.</p>
+
+  <h3><a href="https://sokol.enterprises" target="_blank" rel="noopener">Sokol Enterprises</a> — Los Angeles, California</h3>
+  <p>I work alongside my brother, Daniel Sokol, on many of our software development projects in our holdings company called Sokol Enterprises.</p>
+
+  <h2>Further history</h2>
+  <p>I have built several other companies, including <a href="https://airplant.garden" target="_blank" rel="noopener">Airplant Gardens</a>, which was a subscription ecommerce service selling airplants called Tillandsia. We grew this company over 11 months before selling to a PE firm.</p>
+  <p>I've angel invested in <a href="https://datenight.ai" target="_blank" rel="noopener">DateNight.ai</a> created by Ian Mark, a unique dating app, which spun out of CoronaCrush, a dating facebook group with over 20,000 members.</p>
+  <p>I have had many failed projects, too, including OlehStay, BeverlyCoffee, 21Suits, and many others.</p>
+
+</article>
+<footer>
+  <div class="container">
+    <span>© 2026 — Joseph&nbsp;Z.&nbsp;Sokol</span>
+    <span>Los Angeles, CA</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Moving on from Milan — Joseph Z. Sokol</title>
+<meta name="description" content="Notes from Milan, en route to Israel — on language, espresso, and why I skipped the Barcelona leg of the trip." />
+<meta name="theme-color" content="#FAFAF5" />
+<link rel="icon" type="image/png" href="assets/256-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0F172A;--ink-soft:rgba(15,23,42,.72);--ink-mute:rgba(15,23,42,.55);
+    --rule:rgba(15,23,42,.10);--paper:#FAFAF5;--card:#FFFFFF;
+    --accent:#1E3A8A;--accent-hover:#1E40AF;--accent-bg:#EEF2FF;--cardio:#DC2626;
+    --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0} html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:rgba(30,58,138,.18);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-hover)}
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;letter-spacing:-0.012em;margin:0}
+  p{margin:0 0 1em}
+  .topbar{border-bottom:1px solid var(--rule);background:rgba(250,250,250,.85);backdrop-filter:saturate(160%) blur(10px);position:sticky;top:0;z-index:10}
+  .topbar__inner{max-width:780px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .topbar__brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-0.01em;color:var(--ink)}
+  .topbar__brand img{width:32px;height:32px;border-radius:999px;object-fit:cover;object-position:center 18%;background:#EEF2FF;border:1px solid var(--rule)}
+  .topbar__back{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .topbar__back:hover{color:var(--accent)}
+  .article{max-width:780px;margin:0 auto;padding:48px 24px 64px}
+  .article__eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;font-weight:500}
+  .article__title{font-family:var(--sans);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.02;letter-spacing:-0.028em;color:var(--ink);margin:0 0 18px}
+  .article__deck{font-size:1.12rem;line-height:1.55;color:var(--ink-soft);max-width:64ch;margin:0 0 24px}
+  .article__byline{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 4px}
+  .article__byline strong{color:var(--ink);font-weight:600}
+  .article__meta{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:14px 0 18px;margin:24px 0 36px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  .article__cover{margin:0 0 36px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff}
+  .article__cover img{width:100%;height:auto;display:block}
+  .article h2{font-family:var(--sans);font-weight:600;letter-spacing:-0.014em;font-size:1.45rem;line-height:1.2;color:var(--ink);margin:2.4em 0 .7em;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+  .article h3{font-family:var(--sans);font-weight:600;letter-spacing:-0.008em;font-size:1.1rem;line-height:1.3;color:var(--accent);margin:1.8em 0 .5em}
+  .article p{font-family:var(--sans);font-size:1.04rem;line-height:1.7;color:var(--ink);margin:0 0 1.1em}
+  .article p strong{font-weight:600}
+  .article a{color:var(--accent);border-bottom:1px solid rgba(30,58,138,.35)}
+  .article a:hover{border-bottom-color:var(--accent)}
+  .article blockquote{font-family:var(--sans);font-weight:500;font-size:1.18rem;line-height:1.45;color:var(--ink);border-left:3px solid var(--cardio);padding:6px 0 6px 18px;margin:1.8em 0}
+  .article ol li,.article ul li{font-size:1.04rem;line-height:1.7;color:var(--ink);margin-bottom:.5em}
+  .article ol{padding-left:1.4em}
+  .article figure{margin:2em 0;text-align:center}
+  .article figure img{max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .article figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute);margin-top:14px;line-height:1.6;text-align:left;border-left:2px solid var(--accent);padding:4px 0 4px 12px}
+  .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.5em 0}
+  .photo-grid img{width:100%;height:auto;border-radius:8px;object-fit:cover;display:block}
+  .photo-grid .portrait{grid-row:span 2;aspect-ratio:3/4}
+  .photo-grid .landscape{aspect-ratio:4/3}
+  .photo-caption{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);text-align:center;margin-top:8px;font-style:normal}
+  .footnotes{margin-top:48px;padding-top:24px;border-top:1px solid var(--rule);font-size:.86rem;color:var(--ink-soft)}
+  .footnotes p{font-size:.86rem;line-height:1.55}
+  footer{border-top:1px solid var(--rule);margin-top:0;padding:32px 0 48px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  footer .container{max-width:780px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--ink-mute)} footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__brand" href="index.html">
+      <img src="assets/wiki_profile.png" alt="">
+      <span>Joseph&nbsp;Z.&nbsp;Sokol</span>
+    </a>
+    <a class="topbar__back" href="index.html">← Home</a>
+  </div>
+</nav>
+<article class="article">
+  <span class="article__eyebrow">Personal · Travel</span>
+  <h1 class="article__title">Moving on from Milan</h1>
+  <p class="article__deck">Notes from Milan, en route to Israel — on language, espresso, and why I skipped the Barcelona leg of the trip.</p>
+  <p class="article__byline"><strong>Joseph&nbsp;Z.&nbsp;Sokol</strong></p>
+  <div class="article__meta"><span>March 12, 2025</span><span>Blogging · Personal · Writing · Musings · Europe · Israel</span></div>
+  
+  
+  <p>I've left Milan early to Israel; the thought of continuing on to Barcelona felt a burden too heavy to bear in haste, as I feel anxious to move forward with my agenda. Partly owing is the disquiet in the Italian language, with its sharp sounds and distinctive cadence, which feels altogether too foreign to me, and isolating, a contrast to the sounds I remember not only of Spanish but even of Catalan, which today feels more at home than the decisive pronunciation of Milanese.</p>
+
+  <p>If Spaniards had any stubbornness, the Italians take their place in their loyalty to their customs. The Vespa culture of Italy is alive and well in Milan, with life described in American media true to scene. Architectural facades dominate the cityscape and as John Crow writes: <em>"Everywhere there is beauty in the wide shining of this land. And what nature did not provide has been added by man."</em></p>
+
+  <p>As per the habits of people, on the one end, the most modest and graffitied metro stops are adorned with Italian espresso machines that would only decorate the most delightful cafes of Los Angeles, and on the other, towards the city center, one can purchase a <em>caffe</em> at twice the price, served by an impatient man in a three-piece suit, interpreting the order exchanged only between the internationally recognized coffee cognates, macchiato, due shots, espresso, and so forth. Nothing matters to the Italians more than their coffee, which is available in higher accessibility than anywhere I have seen, and in one of our stops at the De Rosa factory, we were warmly offered an espresso upon arrival, diplomatically offered one during a stressful intermittent interval during the course of our negotiation, and thankfully offered a third for the road as we said our <em>grazie miles</em> in conclusion.</p>
+
+  <p>Cigarette smoking is entirely absent among younger Italians, consistent with a perception of a more conscious and healthier lifestyle, a stark contrast to the older generation that I recall of Catalonians. Unlike the international presence of Barcelona, Milan feels altogether isolated both linguistically and culturally. The fabric of culture is thoroughly homogeneous in that if you've experienced one side of the city, you've experienced them all, harkening the quipped retort from Grampa which goes something like: <em>"Once you've seen one city in Europe, you've seen them all"</em>. I would contest this notion when comparing Barcelona, Zurich, or Milan, but would concur if the sentence were edited to mean, <em>"once you've seen one block of Milan, you've seen it all"</em>.</p>
+
+  <p>Life in Milan is evidently catered to one with a sedentary disposition, content with filling all his or her needs within proximity of essential services. This attitude, together with the monotony that characterizes the distribution of cafes, markets, bars, pharmacies, banks and clothing stores, dissuades the Milanese from venturing too far. The contrast in ways of life in Milan to other parts of Europe comes to surface in the isolated feeling of the language, which while its words are formed from a large corpus of Latin roots, my efforts to employ my hard-earned Castilian vernacular proved ineffective in any exchange.</p>
+
+  <p>English is unspoken among the older shopkeepers, and to convey any grievance about a price or color of a product unsurprisingly coerced me into re-interpreting my own Castilian pronunciation into something more Italic to more smoothly communicate. As such, the reluctance to understand me was quickly sorted by bending my <em>dos</em> and <em>por favor</em> into <em>due</em> and <em>por favore</em>, to bring a brief example. (Now you may believe I am overly pedantic in the above, but may I present to you a scenario where a merchant neglected to provide me a VAT-retrieval voucher for a significant purchase, to which I blame the language barrier despite my attempt to bring use of words from an alternative Latin-derived Spanish. Believe me that I would prefer to have the VAT refund than an ego stroked by conducting a business transaction totally in Italian.)</p>
+
+  <p>The disinclination to entertain similar foreign languages has answered a long-standing question of mine, which is how countries so close together can command such loyalty to their distinct language, unlike in the United States whose language has acquiesced into a national standard. Even a language as similar as Spanish or even other Italian dialects like Sicilian or Neapolitan remain isolated.</p>
+
+  <p>For this reason, my impression of Milan is that despite its international appeal, its citizens are sufficiently content in their isolation, and their stubborn ideals, and therefore the feeling of monotony contributes to the pervasive feeling that each day's experience isn't entirely unique. For now, I am skipping the Barcelona leg of my journey lest the repetitivity of the espresso crawl haunt me further — and where even the smallest deviations from custom require a linguistic negotiation. At least in Israel, if the coffee disappoints, the argument comes free of charge.</p>
+
+  <div class="photo-grid">
+    <img src="assets/milan/italy_1.jpeg" alt="Milan, Italy" class="portrait">
+    <img src="assets/milan/israel_1.jpeg" alt="Israel" class="landscape">
+    <img src="assets/milan/israel_3.jpeg" alt="Israel" class="landscape">
+  </div>
+  <div class="photo-caption">Photos taken on my iPhone</div>
+
+</article>
+<footer>
+  <div class="container">
+    <span>© 2026 — Joseph&nbsp;Z.&nbsp;Sokol</span>
+    <span>Los Angeles, CA</span>
+  </div>
+</footer>
+</body>
+</html>

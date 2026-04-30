@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Death in Aphorisms by the "Einstein of Spain" — Joseph Z. Sokol</title>
+<meta name="description" content="A translation of Jorge Wagensberg's final published essay — fifteen aphorisms on death and the probability of being born." />
+<meta name="theme-color" content="#FAFAF5" />
+<link rel="icon" type="image/png" href="assets/256-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0F172A;--ink-soft:rgba(15,23,42,.72);--ink-mute:rgba(15,23,42,.55);
+    --rule:rgba(15,23,42,.10);--paper:#FAFAF5;--card:#FFFFFF;
+    --accent:#1E3A8A;--accent-hover:#1E40AF;--accent-bg:#EEF2FF;--cardio:#DC2626;
+    --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0} html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:rgba(30,58,138,.18);color:var(--ink)}
+  a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-hover)}
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;letter-spacing:-0.012em;margin:0}
+  p{margin:0 0 1em}
+  .topbar{border-bottom:1px solid var(--rule);background:rgba(250,250,250,.85);backdrop-filter:saturate(160%) blur(10px);position:sticky;top:0;z-index:10}
+  .topbar__inner{max-width:780px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .topbar__brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-0.01em;color:var(--ink)}
+  .topbar__brand img{width:32px;height:32px;border-radius:999px;object-fit:cover;object-position:center 18%;background:#EEF2FF;border:1px solid var(--rule)}
+  .topbar__back{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .topbar__back:hover{color:var(--accent)}
+  .article{max-width:780px;margin:0 auto;padding:48px 24px 64px}
+  .article__eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block;font-weight:500}
+  .article__title{font-family:var(--sans);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.02;letter-spacing:-0.028em;color:var(--ink);margin:0 0 18px}
+  .article__deck{font-size:1.12rem;line-height:1.55;color:var(--ink-soft);max-width:64ch;margin:0 0 24px}
+  .article__byline{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 4px}
+  .article__byline strong{color:var(--ink);font-weight:600}
+  .article__meta{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:14px 0 18px;margin:24px 0 36px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  .article__cover{margin:0 0 36px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff}
+  .article__cover img{width:100%;height:auto;display:block}
+  .article h2{font-family:var(--sans);font-weight:600;letter-spacing:-0.014em;font-size:1.45rem;line-height:1.2;color:var(--ink);margin:2.4em 0 .7em;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+  .article h3{font-family:var(--sans);font-weight:600;letter-spacing:-0.008em;font-size:1.1rem;line-height:1.3;color:var(--accent);margin:1.8em 0 .5em}
+  .article p{font-family:var(--sans);font-size:1.04rem;line-height:1.7;color:var(--ink);margin:0 0 1.1em}
+  .article p strong{font-weight:600}
+  .article a{color:var(--accent);border-bottom:1px solid rgba(30,58,138,.35)}
+  .article a:hover{border-bottom-color:var(--accent)}
+  .article blockquote{font-family:var(--sans);font-weight:500;font-size:1.18rem;line-height:1.45;color:var(--ink);border-left:3px solid var(--cardio);padding:6px 0 6px 18px;margin:1.8em 0}
+  .article ol li,.article ul li{font-size:1.04rem;line-height:1.7;color:var(--ink);margin-bottom:.5em}
+  .article ol{padding-left:1.4em}
+  .article figure{margin:2em 0;text-align:center}
+  .article figure img{max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .article figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-mute);margin-top:14px;line-height:1.6;text-align:left;border-left:2px solid var(--accent);padding:4px 0 4px 12px}
+  .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.5em 0}
+  .photo-grid img{width:100%;height:auto;border-radius:8px;object-fit:cover;display:block}
+  .photo-grid .portrait{grid-row:span 2;aspect-ratio:3/4}
+  .photo-grid .landscape{aspect-ratio:4/3}
+  .photo-caption{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);text-align:center;margin-top:8px;font-style:normal}
+  .footnotes{margin-top:48px;padding-top:24px;border-top:1px solid var(--rule);font-size:.86rem;color:var(--ink-soft)}
+  .footnotes p{font-size:.86rem;line-height:1.55}
+  footer{border-top:1px solid var(--rule);margin-top:0;padding:32px 0 48px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  footer .container{max-width:780px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--ink-mute)} footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__brand" href="index.html">
+      <img src="assets/wiki_profile.png" alt="">
+      <span>Joseph&nbsp;Z.&nbsp;Sokol</span>
+    </a>
+    <a class="topbar__back" href="index.html">← Home</a>
+  </div>
+</nav>
+<article class="article">
+  <span class="article__eyebrow">Translation</span>
+  <h1 class="article__title">Death in Aphorisms by the "Einstein of Spain"</h1>
+  <p class="article__deck">A translation of Jorge Wagensberg's final published essay — fifteen aphorisms on death and the probability of being born.</p>
+  <p class="article__byline"><strong>Joseph&nbsp;Z.&nbsp;Sokol</strong></p>
+  <div class="article__meta"><span>January 19, 2019</span><span>Blogging · Jorge Wagensberg</span></div>
+  <div class="article__cover"><img src="assets/jorge.jpeg" alt="Jorge Wagensberg, the "Einstein of Spain"."></div>
+  
+  <p>On January 30, 2017, Jorge Wagensberg published his article "La Muerte en Aforismos" — "Death in Aphorisms" — in El Pais, the same newspaper that, just one year later, called Jorge the "Einstein of Spain" in an obituary celebrating his life. Jorge was my cousin and part of the generation of our family that survived the holocaust through the foresight of his father's brother who moved to Barcelona shortly prior to Jorge's birth in 1948. Jorge was always the talk of the family, and I had the opportunity to meet Jorge and sit with him for dinner just once in my life when I was living in Spain. As a tribute, I translated this article in his memory.</p>
+
+  <h2>Death in aphorisms</h2>
+  <p>Humans are the first organisms to interrogate themselves. We become based on this self-reflection. At the beginning of our lives we dream up a future, and slowly we form based on our ability to learn from our past. Those two pieces often don't transpire as elegantly as we wish. As we age, the past becomes longer and our introspection more profound. We judge each other based on this ability explicitly, even unconsciously. In all this thinking about life, however, drums up just as much perplexity as thinking about death. Here are my thoughts:</p>
+
+  <ol>
+    <li>The most common phrase found on gravestones, "We will never forget you," implies a bold hypothesis that only others die.</li>
+    <li>Suicide is a perfect crime, as the perpetrator is instantaneously brought to justice.</li>
+    <li>So distracted are we by the idea that we can never find consolation against the certainty that one day we will die, that we hardly consider the infinitesimal probability that we were born.</li>
+    <li>The probability of being reborn after death is colossally small, but not none, as illustrated by the fact that we were born a first time.</li>
+    <li>All of life is simply a mechanism to preserve an array of DNA.</li>
+    <li>Not by direct consequence, but all of death is a product of sexual reproduction.</li>
+    <li>Where will I be after I die? Well, by symmetry, probably in a place similar to where I was before I was born.</li>
+    <li>One has died completely when the last person who knew him dies.</li>
+    <li>If in the future medicine can cure any disease, you would never dare cross the street, because it is one thing to lose your life and quite another to lose all of eternity.</li>
+    <li>You can be enthusiastic about gaining eternal life until you think about the idea that one day you may get bored and remember that in eternity no one dies.</li>
+    <li>When you die, something changes retrospectively in the look of all the photographs taken of you throughout your life.</li>
+    <li>Everything real is thinkable, but not everything thinkable must be real.</li>
+    <li>Therefore, all of thought and its boundless imagination is larger than our entire reality.</li>
+    <li>We have so little time in this world and such wonderful lives to be lived, and what a pity, because there are many ways to be alive and only one to be dead.</li>
+    <li>Epitaph: not being able to read this epitaph after I am deceased.</li>
+  </ol>
+
+  <div class="footnotes">
+    <p><strong>Sources.</strong> Original El Pais article (Jan 30, 2017) and obituary (Mar 3, 2018). Translated from the Castilian by Joseph Z. Sokol in memory of his cousin Jorge.</p>
+  </div>
+
+</article>
+<footer>
+  <div class="container">
+    <span>© 2026 — Joseph&nbsp;Z.&nbsp;Sokol</span>
+    <span>Los Angeles, CA</span>
+  </div>
+</footer>
+</body>
+</html>

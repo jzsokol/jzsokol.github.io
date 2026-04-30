@@ -1,4 +1,657 @@
----
-layout: home
-# Index page
----
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Joseph Z. Sokol — AI for the Heart</title>
+<meta name="description" content="Joseph Z. Sokol — Founder of iCardio.ai. Building AI for echocardiography." />
+<meta name="theme-color" content="#fafafa" />
+<link rel="icon" type="image/png" href="assets/256-favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --ink:#0F172A;             /* deep navy ink */
+    --ink-soft:rgba(15,23,42,.72);
+    --ink-mute:rgba(15,23,42,.55);
+    --rule:rgba(15,23,42,.10);
+    --paper:#FAFAF5;           /* warm cream like blueprint paper */
+    --card:#FFFFFF;
+    --accent:#1E3A8A;          /* blueprint navy */
+    --accent-hover:#1E40AF;
+    --accent-soft:#3B82F6;     /* lighter blueprint blue */
+    --accent-bg:#EEF2FF;       /* ultra-light blueprint */
+    --accent-glow:rgba(59,130,246,.18);
+    --cardio:#DC2626;          /* ECG red */
+    --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:rgba(30,58,138,.18);color:var(--ink)}
+
+  a{color:var(--accent);text-decoration:none}
+  a:hover{color:var(--accent-hover)}
+
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;letter-spacing:-0.012em;margin:0}
+  h1{font-weight:700;letter-spacing:-0.022em}
+  p{margin:0 0 1em}
+
+  .container{
+    max-width:780px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ─── PAGE HEADER (minimal, like Chirpy sidebar header but inline) ─── */
+  .topbar{
+    border-bottom:1px solid var(--rule);
+    background:rgba(250,250,250,.85);
+    backdrop-filter:saturate(160%) blur(10px);
+    position:sticky;top:0;z-index:10;
+  }
+  .topbar__inner{
+    max-width:780px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .topbar__brand{
+    display:flex;align-items:center;gap:10px;
+    font-weight:600;font-size:14px;letter-spacing:-0.01em;
+  }
+  .topbar__brand img{
+    width:32px;height:32px;border-radius:999px;
+    object-fit:cover;object-position:center 18%;
+    background:#EEF2FF;border:1px solid var(--rule);
+  }
+  .topbar__nav{display:flex;gap:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+  .topbar__nav a{color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:1px}
+  .topbar__nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  @media(max-width:560px){.topbar__nav a:not(:first-child){display:none}}
+
+  /* ─── INTRO ─── */
+  .intro{
+    display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:end;
+    padding:56px 0 36px;
+    border-bottom:1px solid var(--rule);
+    margin-bottom:48px;
+  }
+  .intro__avatar{
+    width:280px;height:280px;
+    object-fit:contain;
+    object-position:bottom left;
+    background:transparent;
+    border:0;border-radius:0;
+    align-self:end;
+  }
+  .intro__role{
+    font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:12px;display:block;font-weight:500;
+  }
+  .intro__name{
+    font-size:clamp(34px,5vw,52px);
+    line-height:1.02;letter-spacing:-0.028em;color:var(--ink);margin:0 0 18px;font-weight:700;
+  }
+  .intro__lede{
+    font-size:1.05rem;line-height:1.62;color:var(--ink-soft);
+    max-width:62ch;margin:0 0 18px;
+  }
+  .intro__lede strong{color:var(--ink);font-weight:600}
+  .intro__links{
+    display:flex;flex-wrap:wrap;gap:18px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .intro__links a{color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:1px}
+  .intro__links a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  @media(max-width:680px){
+    .intro{grid-template-columns:1fr;gap:20px;padding-top:36px}
+    .intro__avatar{width:180px;height:180px;justify-self:start}
+    .intro__name{font-size:36px}
+  }
+
+  /* ─── TAGLINE STRIP (accurate / automated / actionable) ─── */
+  .tagstrip{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin:0 0 56px;
+    background:
+      radial-gradient(circle at 25% 50%, rgba(59,130,246,.05), transparent 60%),
+      radial-gradient(circle at 75% 50%, rgba(220,38,38,.04), transparent 60%);
+  }
+  .tagstrip__cell{
+    padding:18px 20px;display:flex;align-items:center;gap:12px;
+    border-right:1px solid var(--rule);
+  }
+  .tagstrip__cell:last-child{border-right:0}
+  .tagstrip__icon{
+    width:28px;height:28px;flex-shrink:0;
+    color:var(--accent);
+  }
+  .tagstrip__icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.6}
+  .tagstrip__lab{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink);font-weight:500;
+  }
+  @media(max-width:560px){
+    .tagstrip{grid-template-columns:1fr}
+    .tagstrip__cell{border-right:0;border-bottom:1px solid var(--rule)}
+    .tagstrip__cell:last-child{border-bottom:0}
+  }
+
+  /* ─── SECTION ─── */
+  .sec{margin-bottom:48px}
+  .sec__head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    gap:12px;margin-bottom:18px;
+    padding-bottom:10px;border-bottom:1px solid var(--rule);
+  }
+  .sec__head h2{
+    font-size:1.2rem;font-weight:600;letter-spacing:-0.01em;color:var(--ink);
+  }
+  .sec__more{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+  }
+
+  /* ─── FEATURED CARD ─── */
+  .feature{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:0;
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;
+    background:var(--card);color:var(--ink);
+    transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+  }
+  .feature:hover{
+    transform:translateY(-1px);border-color:rgba(30,58,138,.40);
+    box-shadow:0 14px 38px -22px rgba(26,26,26,.18);
+  }
+  .feature__copy{padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .feature__eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .feature__title{
+    font-size:clamp(20px,2.4vw,26px);line-height:1.22;letter-spacing:-0.014em;
+    color:var(--ink);margin:4px 0 6px;font-weight:600;
+  }
+  .feature__excerpt{font-size:.95rem;color:var(--ink-soft);line-height:1.6;margin:0}
+  .feature__byline{
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);margin-top:8px;
+  }
+  .feature__cta{
+    margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .feature__visual{
+    background:#FAFAF5;
+    display:flex;align-items:stretch;justify-content:stretch;
+    padding:0;
+    border-left:1px solid var(--rule);
+    overflow:hidden;
+    min-height:300px;
+  }
+  .feature__visual img{
+    width:100%;height:100%;min-height:300px;
+    object-fit:cover;object-position:center;
+    display:block;
+  }
+  @media(max-width:680px){
+    .feature{grid-template-columns:1fr}
+    .feature__visual{border-left:0;border-top:1px solid var(--rule)}
+  }
+
+  /* ─── LATEST (ANNOUNCEMENT) FEATURE ─── */
+  /* vertical layout — banner image on top, text below */
+  .feature--latest{
+    display:block;
+    background:linear-gradient(180deg,#FFFFFF 0%, #F8FAFF 100%);
+  }
+  .feature--latest .feature__banner{
+    width:100%;
+    aspect-ratio: 1430 / 980;          /* matches LinkedIn image */
+    max-height:520px;
+    overflow:hidden;
+    background:
+      linear-gradient(135deg, #EEF2FF 0%, #DBEAFE 60%, #BFDBFE 100%);
+    background-image:
+      linear-gradient(rgba(30,58,138,0.08) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(30,58,138,0.08) 1px,transparent 1px);
+    background-size:32px 32px;
+    border-bottom:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  .feature--latest .feature__banner::before{
+    content:"Drop cedars-announcement.png in /assets/";
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(30,58,138,.55);text-align:center;padding:24px;pointer-events:none;
+  }
+  .feature--latest .feature__banner img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    display:block;position:relative;z-index:1;
+  }
+  .feature--latest .feature__copy{
+    padding:32px 38px 36px;
+    display:block;            /* stack naturally, not centered */
+  }
+  .feature--latest .feature__title{
+    font-size:clamp(22px,2.7vw,30px);letter-spacing:-0.02em;line-height:1.18;
+    margin:6px 0 10px;
+  }
+  .feature--latest .feature__excerpt{font-size:1rem;line-height:1.65;max-width:62ch}
+  .feature--latest:hover{transform:translateY(-1px)}
+
+  @media(max-width:680px){
+    .feature--latest .feature__copy{padding:24px 22px 28px}
+    .feature--latest .feature__banner{max-height:380px}
+  }
+
+  .investors{
+    margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+  .investors__lab{color:var(--accent);font-weight:600}
+  .investors__chip{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:4px 10px;border:1px solid var(--rule);border-radius:999px;
+    background:#fff;color:var(--ink-soft);
+  }
+  .pull-quote{
+    margin:14px 0 0;padding:10px 0 10px 16px;
+    border-left:2px solid var(--cardio);
+    font-family:var(--sans);font-style:italic;font-weight:500;
+    font-size:.95rem;color:var(--ink);line-height:1.45;
+  }
+  .announcement-cta{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:14px;align-self:flex-start;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+    transition:transform .18s ease;
+  }
+  .announcement-cta:hover{color:var(--accent-hover);transform:translateX(2px)}
+  .announcement-cta .arrow{font-size:13px;letter-spacing:0;transition:transform .18s ease}
+  .announcement-cta:hover .arrow{transform:translateX(3px)}
+  .pull-quote cite{
+    display:block;margin-top:6px;font-style:normal;font-family:var(--mono);
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);
+  }
+
+  /* ─── METRICS STRIP ─── */
+  .metrics{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border:1px solid var(--rule);border-radius:8px;overflow:hidden;
+    background:var(--card);margin-bottom:8px;
+  }
+  .metric{padding:18px 20px;border-right:1px solid var(--rule)}
+  .metric:last-child{border-right:0}
+  .metric .num{
+    font-weight:700;font-size:1.5rem;letter-spacing:-0.018em;
+    color:var(--ink);display:block;line-height:1;
+  }
+  .metric .lab{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-mute);margin-top:6px;display:block;
+  }
+  @media(max-width:520px){
+    .metrics{grid-template-columns:1fr}
+    .metric{border-right:0;border-bottom:1px solid var(--rule)}
+    .metric:last-child{border-bottom:0}
+  }
+
+  /* ─── PUBLICATIONS LIST ─── */
+  .pub-list{list-style:none;padding:0;margin:24px 0 0;border-top:1px solid var(--rule)}
+  .pub{
+    border-bottom:1px solid var(--rule);
+    padding:16px 0;
+    display:grid;grid-template-columns:60px 1fr auto;gap:16px;align-items:start;
+  }
+  .pub-year{font-family:var(--mono);font-size:12px;color:var(--ink-mute);padding-top:2px}
+  .pub-title{
+    font-weight:600;font-size:.98rem;line-height:1.35;
+    letter-spacing:-0.008em;color:var(--ink);margin-bottom:4px;display:block;
+  }
+  .pub-title:hover{color:var(--accent)}
+  .pub-venue{font-size:.82rem;color:var(--ink-soft);line-height:1.45}
+  .pub-tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);white-space:nowrap;padding-top:4px;
+  }
+  @media(max-width:560px){.pub{grid-template-columns:1fr;gap:4px}.pub-tag{order:-1}}
+
+  /* ─── WRITING GRID ─── */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card-mini{
+    display:block;background:var(--card);border:1px solid var(--rule);border-radius:8px;
+    padding:22px 24px;color:var(--ink);
+    transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+    min-height:170px;display:flex;flex-direction:column;gap:8px;
+  }
+  .card-mini:hover{
+    transform:translateY(-1px);border-color:rgba(30,58,138,.40);
+    box-shadow:0 14px 38px -22px rgba(26,26,26,.18);
+    color:var(--ink);
+  }
+  .card-mini__eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .card-mini__title{font-weight:600;font-size:1.05rem;line-height:1.3;letter-spacing:-0.01em;color:var(--ink);margin:0}
+  .card-mini__excerpt{font-size:.88rem;color:var(--ink-soft);line-height:1.55;margin:0}
+  .card-mini__meta{
+    margin-top:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+  /* ─── ABOUT TEASER ─── */
+  .about p{font-size:1rem;line-height:1.65;color:var(--ink-soft);max-width:64ch;margin:0 0 1em}
+  .about p:last-child{margin-bottom:0}
+  .about p strong{color:var(--ink);font-weight:600}
+
+  /* ─── VENTURES ─── */
+  .ventures{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .venture{
+    display:block;border:1px solid var(--rule);border-radius:8px;background:var(--card);
+    padding:24px 26px;color:var(--ink);
+    transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .venture:hover{
+    transform:translateY(-1px);border-color:rgba(30,58,138,.40);
+    box-shadow:0 14px 38px -22px rgba(26,26,26,.18);color:var(--ink);
+  }
+  .venture__row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .venture__name{font-weight:600;font-size:1.08rem;letter-spacing:-0.01em;color:var(--ink);margin:0}
+  .venture__loc{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+  .venture__role{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .venture__desc{font-size:.9rem;line-height:1.55;color:var(--ink-soft);margin:0;overflow-wrap:break-word;word-wrap:break-word;hyphens:auto;min-width:0}
+  .venture{min-width:0}
+  .venture__row{min-width:0;flex-wrap:wrap}
+  .venture__link{
+    margin-top:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+  .venture__link:hover{color:var(--accent)}
+  @media(max-width:560px){.ventures{grid-template-columns:1fr}}
+
+  /* ─── FOOTER ─── */
+  footer{
+    border-top:1px solid var(--rule);
+    margin-top:64px;padding:32px 0 48px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);
+  }
+  footer .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{color:var(--ink-mute)}
+  footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- ─── TOPBAR ─── -->
+<nav class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__brand" href="#">
+      <img src="assets/wiki_profile.png" alt="">
+      <span>Joseph&nbsp;Z.&nbsp;Sokol</span>
+    </a>
+    <div class="topbar__nav">
+      <a href="#latest">Latest</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#ventures">Ventures</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ─── INTRO ─── -->
+  <section class="intro">
+    <img src="assets/wiki_profile.png" alt="Joseph Z. Sokol" class="intro__avatar">
+    <div>
+      <span class="intro__role">Founder · iCardio.ai · Los&nbsp;Angeles</span>
+      <h1 class="intro__name">Joseph&nbsp;Z.&nbsp;Sokol</h1>
+      <p class="intro__lede">
+        Hi! I am Joseph Sokol. My work expertise is focused on the application of <strong>artificial intelligence in cardiology</strong>, scientific, technical and commercial. But, more than that, I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-semi-pro cyclist. I am the founder of <a href="https://www.icardio.ai" target="_blank" rel="noopener">iCardio.ai</a> and <a href="https://olehpay.co.il" target="_blank" rel="noopener">OlehPay</a>.
+      </p>
+      <div class="intro__links">
+        <a href="https://www.icardio.ai" target="_blank" rel="noopener">iCardio.ai&nbsp;↗</a>
+        <a href="https://scholar.google.com/citations?user=LbQ36BsAAAAJ&hl=en" target="_blank" rel="noopener">Google&nbsp;Scholar&nbsp;↗</a>
+        <a href="https://www.linkedin.com/in/joseph-sokol/" target="_blank" rel="noopener">LinkedIn&nbsp;↗</a>
+        </div>
+    </div>
+  </section>
+
+  <!-- ─── LATEST · iCardio.ai $4.5M financing ─── -->
+  <section class="sec" id="latest">
+    <div class="sec__head">
+      <h2>Latest news</h2>
+      <a class="sec__more" href="https://www.linkedin.com/in/joseph-sokol/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+
+    <article class="feature feature--latest">
+      <div class="feature__banner">
+        <img src="assets/cedars-announcement.png" alt="iCardio.ai team — Roman Sandler, Joseph Sokol, and Aakriti Gupta — holding a holographic AI-powered echocardiography display, in blueprint-pencil illustration style.">
+      </div>
+
+      <div class="feature__copy">
+        <span class="feature__eyebrow">Announcement · 2025</span>
+        <h3 class="feature__title">iCardio.ai closes $4.5M strategic financing led by Cedars-Sinai Technology Ventures.</h3>
+        <p class="feature__excerpt">
+          The round expands our proprietary data foundation more than fivefold — granting unprecedented access to Cedars-Sinai's institutional cardiac imaging dataset across TTE, TEE, cardiac MR/CT, ECG, and longitudinal outcomes. It builds on the momentum of two FDA clearances applying AI to echocardiography, with several additional regulatory filings pending.
+        </p>
+
+        <blockquote class="pull-quote">
+          "We are at one of the great inflection points in the history of medicine."
+          <cite>— Dr. Harlan Krumholz</cite>
+        </blockquote>
+
+        <a class="announcement-cta" href="https://www.linkedin.com/feed/update/urn:li:activity:7454596924646674433/" target="_blank" rel="noopener">
+          Read the announcement on LinkedIn <span class="arrow">↗</span>
+        </a>
+      </div>
+    </article>
+  </section>
+
+  <!-- ─── TOWARDS THE AUTOMATED ECHO REPORT ─── -->
+  <section class="sec" id="research">
+    <div class="sec__head">
+      <h2>Towards the automated echo report</h2>
+    </div>
+    <a class="feature" href="ai-echo-report.html">
+      <div class="feature__copy">
+        <span class="feature__eyebrow">2025 · Long read</span>
+        <h3 class="feature__title">Towards the automated echocardiographic report</h3>
+        <p class="feature__excerpt">A problem I've been fascinated by since my early 20s. In this review I trace the arc of how the field eventually arrives at the automated echo report — from speckle tracking to multimodal foundation models, the regulatory and reimbursement landscape, and the commercial "space race" now underway.</p>
+        <div class="feature__byline">Sokol&nbsp;J.Z. · Sandler&nbsp;R.A. — iCardio.ai</div>
+        <span class="feature__cta">Read the review →</span>
+      </div>
+      <div class="feature__visual">
+        <img src="assets/echo-report-blueprint.png" alt="Blueprint-style illustration: an AI-powered echocardiography display on the left, with a four-chamber heart cine, MI / TIS / FPS / HR readouts, and an ECG strip — connected by an AI arrow to a structured echocardiographic report on the right showing LV, RV, valve, and impression sections.">
+      </div>
+    </a>
+  </section>
+
+  <!-- ─── PUBLICATIONS ─── -->
+  <section class="sec" id="publications">
+    <div class="sec__head">
+      <h2>Selected publications</h2>
+      <a class="sec__more" href="https://scholar.google.com/citations?user=LbQ36BsAAAAJ&amp;hl=en" target="_blank" rel="noopener">View on Google Scholar ↗</a>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><span class="num">53+</span><span class="lab">Citations · Scholar</span></div>
+      <div class="metric"><span class="num">2018–2025</span><span class="lab">Active research span</span></div>
+      <div class="metric"><span class="num">JASE · MICCAI · ASE</span><span class="lab">Selected venues</span></div>
+    </div>
+
+    <ul class="pub-list">
+      <li class="pub">
+        <span class="pub-year">2025</span>
+        <div>
+          <a class="pub-title" href="ai-echo-report.html">Towards the Automated Echocardiographic Report: A Review</a>
+          <div class="pub-venue">Sokol&nbsp;JZ, Sandler&nbsp;RA — iCardio.ai · Pre-print</div>
+        </div>
+        <span class="pub-tag">Featured</span>
+      </li>
+      <li class="pub">
+        <span class="pub-year">2024</span>
+        <div>
+          <a class="pub-title" href="https://link.springer.com/chapter/10.1007/978-3-031-72114-4_23" target="_blank" rel="noopener">Domain Adaptation of Echocardiography Segmentation Via Reinforcement Learning</a>
+          <div class="pub-venue">Judge&nbsp;A, Judge&nbsp;T, Duchateau&nbsp;N, Sandler&nbsp;RA, Sokol&nbsp;JZ, Bernard&nbsp;O, Jodoin&nbsp;PM — MICCAI 2024</div>
+        </div>
+        <span class="pub-tag">MICCAI</span>
+      </li>
+      <li class="pub">
+        <span class="pub-year">2023</span>
+        <div>
+          <a class="pub-title" href="https://www.sciencedirect.com/science/article/abs/pii/S0894731723000147" target="_blank" rel="noopener">Automated Detection of Aortic Stenosis Using Machine Learning</a>
+          <div class="pub-venue">Journal of the American Society of Echocardiography</div>
+        </div>
+        <span class="pub-tag">JASE</span>
+      </li>
+      <li class="pub">
+        <span class="pub-year">2023</span>
+        <div>
+          <a class="pub-title" href="https://scholar.google.com/citations?user=LbQ36BsAAAAJ&hl=en" target="_blank" rel="noopener">Reproduction of Full Echocardiographic Report using Machine Learning from a Large-scale Echocardiogram Database</a>
+          <div class="pub-venue">Sandler&nbsp;RA, Postolovski&nbsp;D, Muche&nbsp;M, Stojmenski&nbsp;A, Sokol&nbsp;D, Penn&nbsp;J, Sokol&nbsp;JZ — ASE Scientific Sessions</div>
+        </div>
+        <span class="pub-tag">ASE</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ─── VENTURES ─── -->
+  <section class="sec" id="ventures">
+    <div class="sec__head">
+      <h2>Ventures</h2>
+      <a class="sec__more" href="https://sokol.enterprises" target="_blank" rel="noopener">Sokol Enterprises ↗</a>
+    </div>
+    <div class="ventures">
+
+      <a class="venture" href="https://www.icardio.ai" target="_blank" rel="noopener">
+        <div class="venture__row">
+          <h3 class="venture__name">iCardio.ai</h3>
+          <span class="venture__loc">Los Angeles, CA</span>
+        </div>
+        <span class="venture__role">Founder &amp; CEO</span>
+        <p class="venture__desc">A deep-learning startup automating heart-ultrasound interpretation. Founded with Dr. Joshua Penn and Dr. Roman Sandler in October 2019. The iCardio.ai Brain v1 is trained on 200M+ images — among the largest-scale radiological AI products in the world. Partners include GE Healthcare, Butterfly Network, UltraLinQ, and Viz.ai. FDA Breakthrough Device Designation for Aortic Stenosis (Feb 2024); 510(k) clearance for EchoMeasure (Oct 2024).</p>
+        <span class="venture__link">icardio.ai ↗</span>
+      </a>
+
+      <a class="venture" href="https://olehpay.co.il" target="_blank" rel="noopener">
+        <div class="venture__row">
+          <h3 class="venture__name">OlehPay</h3>
+          <span class="venture__loc">Jerusalem, Israel</span>
+        </div>
+        <span class="venture__role">Founder</span>
+        <p class="venture__desc">A multinational fintech operating an online remittance platform — a digital alternative to traditional money transfer and currency exchange. Primarily serves the American expat community in Israel: pension payments, social-security deposits, US-based salaries, Israeli mortgages, and property down-payments. Has served close to 10,000 users and moves millions of dollars between the US and Israel each month.</p>
+        <span class="venture__link">olehpay.co.il ↗</span>
+      </a>
+
+      <a class="venture" href="https://sokol.enterprises" target="_blank" rel="noopener">
+        <div class="venture__row">
+          <h3 class="venture__name">Sokol Enterprises</h3>
+          <span class="venture__loc">Los Angeles, CA</span>
+        </div>
+        <span class="venture__role">Co-founder · with Daniel Sokol</span>
+        <p class="venture__desc">A technology-focused private holdings company. I work alongside my brother, Daniel Sokol, on software development projects and bespoke web applications across our portfolio.</p>
+        <span class="venture__link">sokol.enterprises ↗</span>
+      </a>
+
+      <a class="venture" href="https://bsd.enterprises" target="_blank" rel="noopener">
+        <div class="venture__row">
+          <h3 class="venture__name">BSD Enterprises</h3>
+          <span class="venture__loc">Los Angeles, CA</span>
+        </div>
+        <span class="venture__role">Advisor</span>
+        <p class="venture__desc">Advisor to David Gershov of BSD Enterprises, a private investment boutique based in Los Angeles, California.</p>
+        <span class="venture__link">bsd.enterprises ↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ─── WRITING ─── -->
+  <section class="sec" id="writing">
+    <div class="sec__head">
+      <h2>Writing</h2>
+
+    </div>
+    <div class="grid">
+      <a class="card-mini" href="moving-on-from-milan.html">
+        <span class="card-mini__eyebrow">Personal · Travel</span>
+        <h4 class="card-mini__title">Moving on from Milan</h4>
+        <p class="card-mini__excerpt">Notes from Milan, en route to Israel — on language, espresso, and why I skipped the Barcelona leg of the trip.</p>
+        <span class="card-mini__meta">Mar 2025</span>
+      </a>
+      <a class="card-mini" href="neural-networks-and-the-future-of-ai.html">
+        <span class="card-mini__eyebrow">Cardiology · iCardio.ai</span>
+        <h4 class="card-mini__title">Neural Networks and the Future of AI</h4>
+        <p class="card-mini__excerpt">Why neural networks become the 0/1 operators of the next generation of programs — and what that means for the heart.</p>
+        <span class="card-mini__meta">Aug 2022</span>
+      </a>
+      <a class="card-mini" href="death-in-aphorisms.html">
+        <span class="card-mini__eyebrow">Translation</span>
+        <h4 class="card-mini__title">Death in Aphorisms by the "Einstein of Spain"</h4>
+        <p class="card-mini__excerpt">A translation of Jorge Wagensberg's final published essay — fifteen aphorisms on death and the probability of being born.</p>
+        <span class="card-mini__meta">Jan 2019</span>
+      </a>
+      <a class="card-mini" href="about-me.html">
+        <span class="card-mini__eyebrow">Personal</span>
+        <h4 class="card-mini__title">About Joseph Z. Sokol</h4>
+        <p class="card-mini__excerpt">An internet capsule for all things Joseph — entrepreneur, scientist, writer, classical pianist, ex-pro cyclist.</p>
+        <span class="card-mini__meta">Aug 2019</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section class="sec about" id="about">
+    <div class="sec__head">
+      <h2>About</h2>
+    </div>
+    <p>
+      Hi! I am Joseph Sokol. My work expertise is focused on the application of <strong>artificial intelligence in cardiology</strong>, scientific, technical and commercial. But, more than that, I'm a serial web entrepreneur, tech visionary, published scientist, writer, classical pianist and ex-semi-pro cyclist. I am the founder of <a href="https://www.icardio.ai" target="_blank" rel="noopener">iCardio.ai</a> and <a href="https://olehpay.co.il" target="_blank" rel="noopener">OlehPay</a>.
+    </p>
+    <p>
+      I have taken an atypical path, having dropped out of University to pursue entrepreneurship. I've lived in Spain and Israel, there I taught myself two languages (Spanish, Hebrew). Since my teens, I've passionately pursued classical piano, delving into Chopin, Debussy and other Romantics. At 17, I competed in category 1/2 pro cycling races in California, despite being a Type 1 diabetic. I hold a unique and optimistic perspective on life.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span>© 2026 — Joseph&nbsp;Z.&nbsp;Sokol</span>
+    <span>Los Angeles, CA</span>
+  </div>
+</footer>
+
+</body>
+</html>
