@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Coins — Joseph Z. Sokol</title>
+<link rel="icon" type="image/png" href="/assets/256-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F172A; --ink-soft:rgba(15,23,42,.72); --ink-mute:rgba(15,23,42,.55); --rule:rgba(15,23,42,.10);
+    --paper:#FAFAF5; --card:#FFFFFF; --accent:#1E3A8A; --accent-hover:#1E40AF; --accent-bg:#EEF2FF; --bad:#B42318;
+    --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif; --mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-hover)}
+  .container{max-width:780px;margin:0 auto;padding:0 24px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--rule)}
+  .topbar a,.eyebrow,button.link{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+  .topbar a{color:var(--ink-soft)}
+  h1{font-size:clamp(2rem,5vw,2.6rem);font-weight:700;letter-spacing:-.022em;margin:56px 0 10px;line-height:1.1}
+  .eyebrow{color:var(--ink-mute);margin-top:48px;display:block}
+  .lede{color:var(--ink-soft);max-width:60ch;margin:0 0 32px}
+  form{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
+  input{flex:1 1 260px;font:inherit;padding:11px 14px;border:1px solid var(--rule);border-radius:8px;background:var(--card);color:var(--ink)}
+  input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  button.primary{font:600 15px var(--sans);padding:11px 20px;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
+  button.primary:hover{background:var(--accent-hover)} button:disabled{opacity:.6;cursor:progress}
+  #msg{min-height:1.5em;margin:12px 0 0;color:var(--ink-mute);font-size:14px} #msg.bad{color:var(--bad)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:8px 0 28px}
+  .card{display:block;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:22px;color:var(--ink);transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-1px);color:var(--ink)}
+  .card h2{font-size:1.25rem;margin:8px 0 6px;letter-spacing:-.012em}
+  .card p{margin:0;color:var(--ink-soft);font-size:15px}
+  .card .go{display:inline-block;margin-top:14px;font-weight:600;color:var(--accent)}
+  button.link{background:none;border:0;padding:0;color:var(--ink-mute);cursor:pointer}
+  button.link:hover{color:var(--accent)}
+  footer{border-top:1px solid var(--rule);margin-top:64px;padding:22px 0 40px;color:var(--ink-mute);font-size:13px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar"><a href="/">Joseph Z. Sokol</a><span class="eyebrow" style="margin:0">Coins</span></div>
+
+  <h1>Morgan dollar tools</h1>
+  <p class="lede">A grading model for Morgan silver dollars, trained on certified coins, and a finder that runs it on raw coins listed on eBay.</p>
+
+  <section id="locked">
+    <span class="eyebrow">Private</span>
+    <p class="lede" style="margin-top:6px">Enter the passphrase to open the tools. It is remembered on this device until you lock it again.</p>
+    <form id="f" autocomplete="on">
+      <input type="text" name="username" value="coins" autocomplete="username" hidden>
+      <input id="pw" type="password" autocomplete="current-password" placeholder="Passphrase" aria-label="Passphrase" required>
+      <button class="primary" id="go">Unlock</button>
+    </form>
+    <p id="msg" role="status"></p>
+  </section>
+
+  <section id="open" hidden>
+    <div class="cards">
+      <a class="card" href="grader/"><span class="eyebrow" style="margin:0">Grader</span><h2>Morgan Dollar Grader</h2>
+        <p>Upload photographs of the obverse and reverse and get a Sheldon grade estimate with its uncertainty, value and a heat map of what drove it.</p><span class="go">Open the grader →</span></a>
+      <a class="card" href="finder/"><span class="eyebrow" style="margin:0">Finder</span><h2>Raw Morgan Finder</h2>
+        <p>Ungraded Morgan dollars on eBay, graded from the listing photos and ranked by expected profit after grading and selling fees.</p><span class="go">Open the finder →</span></a>
+    </div>
+    <button class="link" id="lock">Lock on this device</button>
+  </section>
+
+  <footer>Model estimates from photographs, not appraisals.</footer>
+</div>
+<script>
+(async () => {
+  const $ = id => document.getElementById(id), msg = $("msg");
+  const say = (t, bad) => { msg.textContent = t; msg.className = bad ? "bad" : ""; };
+  const params = new URLSearchParams(location.search), next = /^(grader|finder)\/$/.test(params.get("next") || "") ? params.get("next") : null;
+  if (!("serviceWorker" in navigator) || !window.crypto?.subtle) { say("This browser cannot open the tools (it needs service workers and Web Crypto).", true); $("go").disabled = true; return; }
+
+  const db = () => new Promise((ok, no) => { const r = indexedDB.open("coins-lock", 1); r.onupgradeneeded = () => r.result.createObjectStore("k"); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); });
+  const idb = async (mode, fn) => { const d = await db(); return new Promise((ok, no) => { const t = d.transaction("k", mode), q = fn(t.objectStore("k")); t.oncomplete = () => ok(q && q.result); t.onerror = () => no(t.error); }); };
+  const getKey = () => idb("readonly", s => s.get("key")), putKey = k => idb("readwrite", s => s.put(k, "key")), delKey = () => idb("readwrite", s => s.delete("key"));
+  const hex = h => new Uint8Array(h.match(/../g).map(b => parseInt(b, 16)));
+
+  const reg = await navigator.serviceWorker.register("sw.js", { scope: "./" });
+  await navigator.serviceWorker.ready;
+  const tell = m => new Promise(ok => { const ch = new MessageChannel(); ch.port1.onmessage = () => ok(); (reg.active || navigator.serviceWorker.controller).postMessage(m, [ch.port2]); setTimeout(ok, 3000); });
+  const meta = await (await fetch("lock.json", { cache: "no-cache" })).json();
+  const check = async k => { const b = hex(meta.check); try { return new TextDecoder().decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: b.slice(0, 12) }, k, b.slice(12))) === "coins-ok"; } catch { return false; } };
+
+  async function show(open) {
+    $("locked").hidden = open; $("open").hidden = !open;
+    if (open && next) location.replace(next);
+    if (!open) $("pw").focus();
+  }
+
+  let k = await getKey().catch(() => null);
+  if (k && !(await check(k))) { await delKey(); k = null; await tell("lock"); if (params.get("stale")) say("The tools were updated. Enter the passphrase again."); }
+  await show(!!k);
+
+  $("f").addEventListener("submit", async e => {
+    e.preventDefault(); $("go").disabled = true; say("Checking…");
+    try {
+      const base = await crypto.subtle.importKey("raw", new TextEncoder().encode($("pw").value), "PBKDF2", false, ["deriveKey"]);
+      const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: hex(meta.salt), iterations: meta.iter, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+      if (!(await check(key))) { say("That passphrase is not right.", true); return; }
+      await putKey(key); await tell("reload-key"); say(""); $("pw").value = ""; await show(true);
+    } catch (err) { say("Could not unlock: " + err.message, true); }
+    finally { $("go").disabled = false; }
+  });
+  $("lock").addEventListener("click", async () => { await delKey(); await tell("lock"); history.replaceState(null, "", location.pathname); await show(false); });
+})();
+</script>
+</body>
+</html>
